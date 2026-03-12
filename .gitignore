@@ -1,7 +1,40 @@
+# Secrets
 .env
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-output/__pycache__/
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+*.cover
+
+# Output artefacts
 *.xlsx
-/tmp/
+output/__pycache__/
+
+# Claude
+.claude/settings.local.json
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
