@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-sheets-sync-config
+  namespace: argocd
+data:
+  OUTPUT_MODE: "gws"
+  # LOCAL_OUTPUT_PATH is only relevant in local mode; adjust if needed.
+  LOCAL_OUTPUT_PATH: "/data/argocd_apps.xlsx"

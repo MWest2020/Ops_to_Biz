@@ -1,0 +1,87 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: argocd-sheets-sync
+  namespace: argocd
+spec:
+  schedule: "0 6 * * *"
+  timeZone: "UTC"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      # Let the job retry once on transient failures before giving up.
+      backoffLimit: 1
+      template:
+        metadata:
+          labels:
+            app: argocd-sheets-sync
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: argocd-sheets-sync
+          automountServiceAccountToken: false
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+          containers:
+            - name: sync
+              # Pin to a digest in production: docker pull <image> --quiet
+              image: your-registry/argocd-sheets-sync:latest
+              imagePullPolicy: Always
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false   # openpyxl writes temp files
+                capabilities:
+                  drop: ["ALL"]
+              env:
+                - name: ARGOCD_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: argocd-sheets-sync-secret
+                      key: ARGOCD_URL
+                - name: ARGOCD_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: argocd-sheets-sync-secret
+                      key: ARGOCD_TOKEN
+                - name: ARGOCD_LABEL_SELECTORS
+                  valueFrom:
+                    secretKeyRef:
+                      name: argocd-sheets-sync-secret
+                      key: ARGOCD_LABEL_SELECTORS
+                      optional: true
+                - name: OUTPUT_MODE
+                  valueFrom:
+                    configMapKeyRef:
+                      name: argocd-sheets-sync-config
+                      key: OUTPUT_MODE
+                - name: LOCAL_OUTPUT_PATH
+                  valueFrom:
+                    configMapKeyRef:
+                      name: argocd-sheets-sync-config
+                      key: LOCAL_OUTPUT_PATH
+                      optional: true
+                - name: GOOGLE_SPREADSHEET_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: argocd-sheets-sync-secret
+                      key: GOOGLE_SPREADSHEET_ID
+                      optional: true
+                # Path where the credentials JSON will be mounted inside the container.
+                - name: GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE
+                  value: /secrets/gws-credentials.json
+              volumeMounts:
+                - name: gws-credentials
+                  mountPath: /secrets
+                  readOnly: true
+          volumes:
+            - name: gws-credentials
+              secret:
+                secretName: argocd-sheets-sync-secret
+                items:
+                  - key: gws-credentials.json
+                    path: gws-credentials.json
+                # Only readable by the container's user.
+                defaultMode: 0400

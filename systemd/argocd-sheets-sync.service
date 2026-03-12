@@ -1,0 +1,12 @@
+[Unit]
+Description=ArgoCD → Google Sheets sync
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/gongoeloe/projects/Ops_to_Biz
+EnvironmentFile=/home/gongoeloe/projects/Ops_to_Biz/.env
+ExecStart=/home/gongoeloe/projects/Ops_to_Biz/sync.sh
+StandardOutput=journal
+StandardError=journal
