@@ -1,5 +1,11 @@
 # Secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*_rsa
+*_rsa.pub
 
 # Python
 __pycache__/
@@ -38,3 +44,7 @@ output/__pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Google Service Account key — nooit committen
+audit/config/service_account.json
+*.json.key

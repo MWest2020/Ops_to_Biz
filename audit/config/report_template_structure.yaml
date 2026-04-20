@@ -1,0 +1,93 @@
+# Gecombineerde rapportstructuur: ISO 9001:2015 + ISO 27001:2022 addendum
+# Versie: v1.0  |  Aangemaakt: 2026-03-13
+# Normen: ISO 9001:2015 / ISO 27001:2022
+
+versie: "1.0"
+normen:
+  - "ISO 9001:2015"
+  - "ISO 27001:2022"
+
+secties:
+  - id: koptekst
+    titel: "Auditrapport"
+    placeholders:
+      - naam: rapport_titel
+        omschrijving: "Volledige rapporttitel incl. norm en datum"
+      - naam: norm
+        omschrijving: "Toepasselijke norm(en)"
+      - naam: template_versie
+        omschrijving: "Template-versie (bijv. v1.0)"
+      - naam: aanmaakdatum
+        omschrijving: "Datum aanmaak rapport (JJJJ-MM-DD)"
+
+  - id: auditinfo
+    titel: "1. Auditinformatie"
+    placeholders:
+      - naam: auditdoel
+        omschrijving: "Doel van de audit"
+      - naam: auditscope
+        omschrijving: "Scope: processen, afdelingen, locaties"
+      - naam: uitvoeringsperiode
+        omschrijving: "Van datum t/m datum"
+      - naam: auditteam
+        omschrijving: "Namen en rollen van auditoren"
+      - naam: referentienorm
+        omschrijving: "ISO 9001:2015 / ISO 27001:2022"
+      - naam: vorige_audit_datum
+        omschrijving: "Datum vorige interne audit"
+
+  - id: management_summary
+    titel: "2. Management Summary"
+    placeholders:
+      - naam: management_summary
+        omschrijving: "Nederlandstalige samenvatting max 300 woorden"
+      - naam: totaal_nc
+        omschrijving: "Aantal non-conformiteiten"
+      - naam: totaal_ofi
+        omschrijving: "Aantal kansen voor verbetering"
+      - naam: totaal_positief
+        omschrijving: "Aantal positieve bevindingen"
+      - naam: overall_oordeel
+        omschrijving: "Overall auditconclusie (bijv. voldoende/onvoldoende)"
+
+  - id: bevindingen_9001
+    titel: "3. Bevindingen ISO 9001:2015"
+    omschrijving: "Per clausule: NC's, OFI's en positieve observaties"
+    placeholders:
+      - naam: bevindingen_9001
+        omschrijving: "Gegenereerde bevindingstabel per clausule (NC/OFI/positief)"
+
+  - id: bevindingen_27001
+    titel: "4. Bevindingen ISO 27001:2022 (Addendum)"
+    omschrijving: "Annex A controls — alleen opgenomen bij gecombineerde audit"
+    placeholders:
+      - naam: bevindingen_27001
+        omschrijving: "Gegenereerde bevindingstabel per Annex A control"
+
+  - id: ontbrekende_bewijsstukken
+    titel: "5. Ontbrekende bewijsstukken"
+    placeholders:
+      - naam: ontbrekende_clausules
+        omschrijving: "Lijst van clausules zonder gedocumenteerd bewijs"
+      - naam: handmatige_review_items
+        omschrijving: "Bestanden die handmatige review vereisen (scans etc.)"
+
+  - id: conclusie
+    titel: "6. Conclusie en aanbevelingen"
+    placeholders:
+      - naam: conclusie
+        omschrijving: "Samenvattende conclusie en top-3 aanbevelingen"
+      - naam: top3_aanbevelingen
+        omschrijving: "Genummerde lijst van prioritaire actiepunten"
+
+  - id: handtekeningen
+    titel: "7. Handtekeningblok"
+    placeholders:
+      - naam: auditor_naam
+        omschrijving: "Naam lead-auditor"
+      - naam: auditor_handtekening_datum
+        omschrijving: "Datum ondertekening auditor"
+      - naam: management_naam
+        omschrijving: "Naam verantwoordelijk manager"
+      - naam: management_handtekening_datum
+        omschrijving: "Datum ondertekening management"

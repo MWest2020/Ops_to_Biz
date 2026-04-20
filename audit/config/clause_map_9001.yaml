@@ -1,0 +1,849 @@
+norm: ISO 9001:2015
+clausules:
+  '4.1':
+    titel: Inzicht in de organisatie en haar context
+    zoektermen:
+    - contextanalyse
+    - omgevingsanalyse
+    - strategische richting
+    - externe en interne aangelegenheden
+    - strategie 2022
+    - strategisch document conduction
+    sub_punten:
+    - id: a
+      # Externe aangelegenheden: markt, wet/regelgeving, concurrentie, technologie
+      zoektermen:
+      - PESTEL
+      - marktanalyse
+      - strategisch document conduction
+      - strategie 2022
+      - klimaat en duurzaamheid
+      - externe context
+      - missie
+      - golden circle
+      - concurrentie
+    - id: b
+      # Interne aangelegenheden: cultuur, capaciteit, kennis, systemen, waarden
+      zoektermen:
+      - evalutie processen
+      - evaluatie processen 2022
+      - organogram
+      - mensen en middelen 2022
+      - interne context
+      - visie slogan
+      - capaciteit conduction
+  '4.2':
+    titel: Inzicht in de behoeften en verwachtingen van belanghebbenden
+    zoektermen:
+    - stakeholderregister
+    - partnerorganisatie
+    - partner review
+    - interested parties
+    - conduction aanpak iso
+    sub_punten:
+    - id: a
+      # Relevante belanghebbenden geïdentificeerd
+      zoektermen:
+      - partnerorganisatie
+      - conduction aanpak iso 9001
+      - brandveiligheidsplan
+      - mensen en middelen
+      - reactie op fase 1 rapportage brand
+      - stakeholderregister
+      - belanghebbenden
+    - id: b
+      # Relevante eisen per belanghebbende vastgesteld (contractueel, wettelijk)
+      zoektermen:
+      - algemene voorwaarden conduction
+      - verwerkersovereenkomst
+      - informatie en toestemming klanten
+      - verzoek mbt persoonsgegevens
+      - avg handboek
+      - standaard service level
+    - id: c
+      # Informatie over belanghebbenden periodiek gemonitord en herzien
+      zoektermen:
+      - management review
+      - iso partnerevaluatie
+      - partner review
+      - partnerreview
+      - herziening stakeholders
+      - agenda partneroverleg
+  '4.3':
+    titel: Bepalen van het toepassingsgebied van het kwaliteitsmanagementsysteem
+    zoektermen:
+    - toepassingsgebied
+    - beleidsverklaring kwaliteitsmanagementsysteem
+    - referentiedocument iso conduction
+    - scopeomschrijving
+    sub_punten:
+    - id: a
+      # Context (4.1) en stakeholdereisen (4.2) meegenomen bij scopebepaling
+      zoektermen:
+      - beleidsverklaring kwaliteitsmanagementsysteem
+      - beleidsverkaring kwaliteits
+      - referentiedocument iso conduction
+      - conduction aanpak iso 9001
+      - toepassingsgebied
+      - scopebepaling
+    - id: b
+      # Activiteiten, producten en diensten van de organisatie beschreven
+      zoektermen:
+      - scopeomschrijving
+      - referentiedocument iso conduction
+      - conduction aanpak iso 9001
+      - diensten conduction
+      - productportfolio
+    - id: c
+      # Uitsluitingen gemotiveerd en beperkt tot clausules zonder invloed op conformiteit
+      zoektermen:
+      - uitsluitingen
+      - clausule-uitsluiting
+      - verklaring van toepasselijkheid
+      - scope uitsluiting
+  '4.4':
+    titel: Kwaliteitsmanagementsysteem en de processen ervan
+    zoektermen:
+    - proceslandkaart
+    - processen en procedures
+    - schildpad
+    - processen systemen en risico
+    - procesoverzicht
+    sub_punten:
+    - id: a
+      # Processen bepaald: inputs, outputs, volgorde en wisselwerking
+      zoektermen:
+      - proceslandkaart
+      - schildpad
+      - processen en procedures
+      - processen systemen en risico-inventarisatie
+      - procesoverzicht
+      - process map
+    - id: b
+      # Criteria, methoden en KPI's per proces vastgesteld
+      zoektermen:
+      - production control plan
+      - kwaliteitsmeetlat
+      - procesindicatoren
+      - kpi processen
+      - schildpad-diagram met meting
+      - meetmethode
+    - id: c
+      # Verantwoordelijkheden en bevoegdheden per proces belegd
+      zoektermen:
+      - organogram
+      - raci
+      - proceseigenaar
+      - procesverantwoordelijke
+      - onduidelijke rollen verantwoordelijkheden
+      - rollen verantwoordelijkheden bevoegdheden
+    - id: d
+      # Risico's en kansen per proces geïdentificeerd
+      zoektermen:
+      - risico-inventarisatie conduction
+      - processen systemen en risico-inventarisatie
+      - risicoregister
+      - ri&e
+      - risicokolom
+    - id: e
+      # Processen continu verbeterd; gedocumenteerde informatie bewaard
+      zoektermen:
+      - evaluaties en bijsturing
+      - opvolging interne audit
+      - conduction acties uit te voeren
+      - verbeterregister
+      - versiehistorie procedure
+      - procesverbetering
+  '5.1':
+    titel: Leiderschap en betrokkenheid
+    zoektermen:
+    - management review
+    - agenda onderwerpen mt kwaliteit
+    - instructie management review
+    - beleidschrijven iso
+    sub_punten:
+    - id: a
+      # Directie eindverantwoordelijk voor KMS-effectiviteit
+      zoektermen:
+      - management review
+      - agenda onderwerpen mt kwaliteit
+      - instructie management review
+      - beleidschrijven iso
+    - id: b
+      # Kwaliteitsbeleid afgestemd op strategische richting
+      zoektermen:
+      - beleidsverklaring kwaliteitsmanagementsysteem
+      - beleidsverkaring kwaliteits
+      - strategie 2022
+      - strategisch document conduction
+    - id: c
+      # KMS geïntegreerd in bedrijfsprocessen
+      zoektermen:
+      - conduction aanpak iso 9001
+      - way of work
+      - processen en procedures
+    - id: d
+      # Klantgerichtheid geborgd door topmanagement
+      zoektermen:
+      - nps plan klanttevredenheid
+      - klanttevredenheid 2023
+      - klant evaluatie
+      - punten van feedback klanttevredenheid
+  '5.2':
+    titel: Beleid
+    zoektermen:
+    - beleidsverklaring kwaliteitsmanagementsysteem
+    - beleidsverkaring kwaliteits
+    - beleidschrijven iso
+    sub_punten:
+    - id: a
+      # Kwaliteitsbeleid passend bij context en doel van de organisatie
+      zoektermen:
+      - beleidsverklaring kwaliteitsmanagementsysteem
+      - beleidsverkaring kwaliteitsmanagementstysteem
+      - beleidschrijven iso
+    - id: b
+      # Kwaliteitsdoelstellingen als kader
+      zoektermen:
+      - beleidsverklaring kwaliteitsmanagementsysteem
+      - kwaliteitsmeetlat
+    - id: c
+      # Commitment aan continue verbetering
+      zoektermen:
+      - beleidsverklaring kwaliteitsmanagementsysteem
+      - evaluaties en bijsturing
+    - id: d
+      # Beleid gecommuniceerd en beschikbaar
+      zoektermen:
+      - iso handboek
+      - kwaliteit en dataveiligheid kwaliteitsessie
+      - conduction aanpak iso 9001
+      - gedragscode conduction
+  '5.3':
+    titel: Organisatorische rollen, verantwoordelijkheden en bevoegdheden
+    zoektermen:
+    - organogram
+    - mensen en middelen
+    - rollen verantwoordelijkheden bevoegdheden
+    sub_punten:
+    - id: a
+      # Rollen en verantwoordelijkheden voor KMS toegewezen
+      zoektermen:
+      - organogram
+      - mensen en middelen 2022
+      - rollen verantwoordelijkheden bevoegdheden
+      - raci
+    - id: b
+      # Rapportage over KMS-prestaties aan topmanagement geborgd
+      zoektermen:
+      - management review
+      - instructie management review
+      - agenda onderwerpen mt kwaliteit
+    - id: c
+      # Klantgerichtheid geborgd via rollen
+      zoektermen:
+      - klant evaluatie
+      - nps plan klanttevredenheid
+      - klanttevredenheid 2023
+  '6.1':
+    titel: Acties om risico's en kansen te behandelen
+    zoektermen:
+    - processen systemen en risico-inventarisatie
+    - risico-inventarisatie conduction
+    - overzicht van maatregelen ri&e
+    sub_punten:
+    - id: a
+      # Risico's en kansen bepaald in context van KMS
+      zoektermen:
+      - processen systemen en risico-inventarisatie
+      - risico-inventarisatie conduction
+      - ri&e
+    - id: b
+      # Maatregelen voor risico's vastgesteld en geïmplementeerd
+      zoektermen:
+      - overzicht van maatregelen ri&e
+      - plan van aanpak conduction ri&e
+      - beheersmaatregelen iso
+      - conduction acties uit te voeren
+    - id: c
+      # Effectiviteit van maatregelen beoordeeld
+      zoektermen:
+      - opvolging interne audit
+      - evaluatie strategisch plan
+      - aantekeningen terugkoppeling hercertificeringsaudit
+  '6.2':
+    titel: Kwaliteitsdoelstellingen en plannen om deze te bereiken
+    zoektermen:
+    - kwaliteitsmeetlat
+    - nps plan klanttevredenheid
+    - conduction acties uit te voeren
+    sub_punten:
+    - id: a
+      # Meetbare kwaliteitsdoelstellingen per relevante functie/proces
+      zoektermen:
+      - kwaliteitsmeetlat
+      - nps plan klanttevredenheid
+      - project definitie nps
+    - id: b
+      # Actieplan per doelstelling (wie, wat, wanneer, hoe)
+      zoektermen:
+      - conduction aanpak iso 9001
+      - conduction acties uit te voeren
+    - id: c
+      # Voortgang doelstellingen gemonitord en gerapporteerd
+      zoektermen:
+      - management review
+      - interne audit
+      - kwaliteitsmeetlat
+  '6.3':
+    titel: Planning van wijzigingen
+    zoektermen:
+    - implementatie nieuwe iso-27001 norm
+    - veranderingen iso-27001
+    - transitie 27001
+    - reactie en acties nav
+    sub_punten:
+    - id: a
+      # Wijzigingen gepland met impactanalyse
+      zoektermen:
+      - implementatie nieuwe iso-27001 norm
+      - veranderingen iso-27001
+      - transitie 27001
+      - belangrijkste wijzigingen in iso
+    - id: b
+      # Samenhang en integriteit van KMS bewaard bij wijzigingen
+      zoektermen:
+      - conduction aanpak iso 9001
+      - reactie en acties nav
+    - id: c
+      # Resources en verantwoordelijkheid bij wijzigingen belegd
+      zoektermen:
+      - conduction acties uit te voeren
+      - reactie en acties nav
+  '7.1':
+    titel: Middelen
+    zoektermen:
+    - mensen en middelen 2022
+    - technisch beheer databeveiliging
+    - logging & compliance
+    sub_punten:
+    - id: a
+      # Personeel: benodigde mensen bepaald en beschikbaar
+      zoektermen:
+      - mensen en middelen 2022
+      - organogram
+      - capaciteitsplanning
+    - id: b
+      # Infrastructuur: hardware, software, cloud
+      zoektermen:
+      - technisch beheer databeveiliging
+      - logging & compliance
+      - way of work dataveiligheid
+    - id: c
+      # Werkomgeving (fysiek, sociaal, psychologisch)
+      zoektermen:
+      - ri&e
+      - plan van aanpak conduction ri&e
+      - klimaat en duurzaamheid
+      - website ri&e
+    - id: d
+      # Meetmiddelen voor monitoring van procesuitvoer
+      zoektermen:
+      - kwaliteitsmeetlat
+      - production control plan
+    - id: e
+      # Organisatiekennis geborgd en beschikbaar
+      zoektermen:
+      - gedragscode conduction
+      - way of work dataveiligheid
+      - referentiedocument iso conduction
+      - kennismanagement
+  '7.2':
+    titel: Competentie
+    zoektermen:
+    - evaluatie hr 2022
+    - plan van aanpak dataveiligheidssessies
+    - feedback formulier trainingen
+    sub_punten:
+    - id: a
+      # Benodigde competenties per functie bepaald
+      zoektermen:
+      - mensen en middelen 2022
+      - evaluatie hr 2022
+      - kwaliteitsbewust en dataveiligheids-savvy
+    - id: b
+      # Bewijs van aanwezige competentie
+      zoektermen:
+      - kwaliteitsbewust en dataveiligheids-savvy
+      - feedback formulier trainingen
+    - id: c
+      # Opleidingen/maatregelen om competentiegaps te dichten
+      zoektermen:
+      - plan van aanpak dataveiligheidssessies
+      - bewustwordingssessie
+      - dataveiligheidssessie
+    - id: d
+      # Records van competentie bewaard
+      zoektermen:
+      - evaluatie hr 2022
+      - feedback formulier trainingen
+      - feedback formulier trainingen belastingdienst
+  '7.3':
+    titel: Bewustzijn
+    zoektermen:
+    - bewustwordingssessie
+    - dataveiligheidssessie
+    - kwaliteitsessie
+    - gedragscode conduction
+    sub_punten:
+    - id: a
+      # Medewerkers bewust van kwaliteitsbeleid
+      zoektermen:
+      - gedragscode conduction
+      - beleidsverklaring kwaliteitsmanagementsysteem
+      - iso handboek
+    - id: b
+      # Medewerkers kennen relevante kwaliteitsdoelstellingen
+      zoektermen:
+      - kwaliteit en dataveiligheid kwaliteitsessie
+      - kwaliteitsbewust en dataveiligheids-savvy
+    - id: c
+      # Bewustwordingsactiviteiten uitgevoerd
+      zoektermen:
+      - bewustwordingssessie
+      - dataveiligheidssessie
+      - plan van aanpak dataveiligheidssessies
+      - kwaliteitsessie
+    - id: d
+      # Gevolgen van niet-naleving bekend
+      zoektermen:
+      - gedragscode conduction
+      - geheimhoudings­verklaring
+      - geheimhhoudingsverklaring
+  '7.4':
+    titel: Communicatie
+    zoektermen:
+    - agenda partneroverleg iso conduction
+    - agenda onderwerpen mt kwaliteit
+    - instructie management review
+    sub_punten:
+    - id: a
+      # Interne en externe communicatie over KMS geregeld
+      zoektermen:
+      - agenda onderwerpen mt kwaliteit
+      - instructie management review
+      - agenda partneroverleg iso conduction
+    - id: b
+      # Overlegfrequentie en -structuur met stakeholders
+      zoektermen:
+      - agenda partneroverleg iso conduction 25 mei
+      - partnerreview
+      - iso partnerevaluatie sim
+  '7.5':
+    titel: Gedocumenteerde informatie
+    zoektermen:
+    - referentiedocument iso conduction
+    - beleidsverklaring kwaliteitsmanagementsysteem en inhoudsopgaven
+    - processen en procedures
+    sub_punten:
+    - id: a
+      # Documentregister: overzicht van vereiste gedocumenteerde informatie
+      zoektermen:
+      - referentiedocument iso conduction
+      - beleidsverklaring kwaliteitsmanagementsysteem en inhoudsopgaven
+      - conduction aanpak iso 9001
+    - id: b
+      # Versiebeheer en goedkeuringsproces voor documenten
+      zoektermen:
+      - referentiedocument iso conduction
+      - versiehistorie
+      - implementatie nieuwe iso-27001 norm
+    - id: c
+      # Toegangsrechten, bewaarbeleid en bescherming van documenten
+      zoektermen:
+      - logging & compliance
+      - technisch beheer databeveiliging
+      - standpunt en proces voor hosting van persoonsgegevens
+  '8.1':
+    titel: Operationele planning en beheersing
+    zoektermen:
+    - production control plan
+    - "definities en procedures: incident"
+    - way of work dataveiligheid
+    sub_punten:
+    - id: a
+      # Criteria voor processen vastgesteld (DoD, acceptatiecriteria)
+      zoektermen:
+      - production control plan
+      - "definities en procedures: incident"
+      - way of work dataveiligheid
+    - id: b
+      # Records van procesuitvoering bewaard
+      zoektermen:
+      - interne audit q
+      - opvolging interne audit
+    - id: c
+      # Uitbestede processen beheerst
+      zoektermen:
+      - iso partnerevaluatie sim/ procura
+      - partnerorganisatie
+      - partnerreview
+    - id: d
+      # Onvoorziene wijzigingen beheerst
+      zoektermen:
+      - memo afwijking sprintmethodiek
+      - iso-387 memo afwijking
+      - reactie en acties nav
+  '8.2':
+    titel: Eisen voor producten en diensten
+    zoektermen:
+    - algemene voorwaarden conduction
+    - informatie aan klanten
+    - conduction aanpak iso 9001
+    sub_punten:
+    - id: a
+      # Informatie over diensten beschikbaar voor (potentiële) klanten
+      zoektermen:
+      - informatie aan klanten
+      - informatie en toestemming klanten
+      - algemene voorwaarden conduction
+    - id: b
+      # Eisen voor producten/diensten bepaald inclusief wettelijke eisen
+      zoektermen:
+      - conduction aanpak iso 9001
+      - algemene voorwaarden conduction
+      - memo afwijking q1 offertes
+    - id: c
+      # Vastlegging van overeengekomen eisen
+      zoektermen:
+      - algemene voorwaarden conduction
+      - standaardverwerkersovereenkomst
+      - getekend contract
+    - id: d
+      # Klantfeedback en klachten verwerkt
+      zoektermen:
+      - klant evaluatie
+      - klanttevredenheid 2023
+      - punten van feedback klanttevredenheid
+      - mislukte feedback breda
+  '8.3':
+    titel: Ontwerp en ontwikkeling van producten en diensten
+    zoektermen:
+    - production control plan
+    - memo afwijking code review
+    - bevindingen refactor
+    sub_punten:
+    - id: a
+      # Ontwikkelproces (SDLC) gedefinieerd
+      zoektermen:
+      - production control plan
+      - processen en procedures
+      - way of work dataveiligheid
+    - id: b
+      # Inputs voor ontwerp/ontwikkeling bepaald
+      zoektermen:
+      - conduction aanpak iso 9001
+      - processen systemen en risico-inventarisatie
+    - id: c
+      # Reviews tijdens ontwerp/ontwikkeling uitgevoerd
+      zoektermen:
+      - memo afwijking code review
+      - bevindingen refactor
+      - interne audit q
+    - id: d
+      # Verificatie: output voldoet aan input-eisen
+      zoektermen:
+      - production control plan
+      - memo afwijking sprintmethodiek
+    - id: e
+      # Wijzigingen in ontwerp beheerst
+      zoektermen:
+      - iso-387 memo afwijking
+      - conduction acties uit te voeren
+      - reactie en acties nav
+  '8.4':
+    titel: Beheersing van extern geleverde processen, producten en diensten
+    zoektermen:
+    - iso partnerevaluatie sim/ procura
+    - partnerreview
+    - opzet jaarlijkse evaluatie voor partners
+    sub_punten:
+    - id: a
+      # Leverancierslijst en kwalificatiecriteria
+      zoektermen:
+      - iso partnerevaluatie sim/ procura
+      - partnerorganisatie
+      - opzet jaarlijkse evaluatie voor partners
+    - id: b
+      # Leveranciersevaluatie uitgevoerd
+      zoektermen:
+      - partnerreview 8 en 21 maart 2024
+      - 2022 9001 partner review
+      - 2023 partnerreview 9001
+      - iso partnerevaluatie sim/ procura
+    - id: c
+      # Eisen aan leveranciers gecommuniceerd
+      zoektermen:
+      - agenda partneroverleg iso conduction
+      - algemene voorwaarden conduction
+  '8.5':
+    titel: Productie en dienstverleninguitvoering
+    zoektermen:
+    - processen en procedures
+    - way of work dataveiligheid
+    - technisch beheer databeveiliging
+    sub_punten:
+    - id: a
+      # Werkinstructies/procedures beschikbaar en gevolgd
+      zoektermen:
+      - processen en procedures
+      - way of work dataveiligheid
+      - "definities en procedures: incident"
+    - id: b
+      # Traceerbaarheid van outputs geborgd
+      zoektermen:
+      - logging & compliance
+      - technisch beheer databeveiliging
+    - id: c
+      # Persoonsgegevens van klanten beschermd
+      zoektermen:
+      - standaardverwerkersovereenkomst
+      - avg handboek
+      - informatie en toestemming klanten
+      - standpunt en proces voor hosting van persoonsgegevens
+    - id: d
+      # Bewaarprotocol en back-up beleid
+      zoektermen:
+      - technisch beheer databeveiliging
+      - logging & compliance
+      - standpunt en proces voor hosting
+    - id: e
+      # Garantie/support na levering
+      zoektermen:
+      - algemene voorwaarden conduction
+  '8.6':
+    titel: Vrijgave van producten en diensten
+    zoektermen:
+    - production control plan
+    - nl 2357.1.1 - conduction
+    - nl 2356.1.1 - conduction
+    sub_punten:
+    - id: a
+      # Records van verificatie/keuringen bewaard
+      zoektermen:
+      - production control plan
+      - interne audit q
+      - afwijking registratieformulier
+    - id: b
+      # Autorisatie voor vrijgave door bevoegde persoon
+      zoektermen:
+      - opvolging interne audit
+      - aantekeningen terugkoppeling hercertificeringsaudit
+  '8.7':
+    titel: Beheersing van afwijkende procesuitvoer
+    zoektermen:
+    - memo afwijking
+    - rode draad incidenten afwijkingen
+    - "definities en procedures: incident, afwijking en tekortkoming"
+    sub_punten:
+    - id: a
+      # Register van afwijkingen bijgehouden
+      zoektermen:
+      - rode draad incidenten afwijkingen
+      - "definities en procedures: incident, afwijking en tekortkoming"
+      - afwijking registratieformulier
+      - overzicht van soorten bevindingen
+    - id: b
+      # Corrigerende actie op afwijking ondernomen
+      zoektermen:
+      - memo afwijking
+      - reactie en acties nav
+      - opvolging interne audit
+    - id: c
+      # Klant geïnformeerd bij relevante afwijking
+      zoektermen:
+      - incident mail 15-08-2025
+      - mail van conduction
+      - incident procura /gemeente nijmegen
+    - id: d
+      # Afwijking volledig gedocumenteerd
+      zoektermen:
+      - handleiding memo afwijking
+      - afwijking registratieformulier
+      - overzicht van soorten bevindingen bij iso-audits
+  '9.1':
+    titel: Bewaking, meting, analyse en evaluatie
+    zoektermen:
+    - kwaliteitsmeetlat
+    - klanttevredenheid 2023
+    - jaarevaluatie 2023
+    - evaluaties en bijsturing
+    sub_punten:
+    - id: a
+      # Wat, wanneer en hoe gemeten en geanalyseerd
+      zoektermen:
+      - kwaliteitsmeetlat
+      - nps plan klanttevredenheid
+      - evaluaties en bijsturing
+    - id: b
+      # Klanttevredenheid gemeten en geanalyseerd
+      zoektermen:
+      - klanttevredenheid 2023
+      - klant evaluatie formulier
+      - nps plan klanttevredenheid
+      - punten van feedback klanttevredenheid
+      - "titel: klanttevredenheidsonderzoek"
+      - we gaan het anders aanpakken in 2025
+      - project definitie nps
+      - tiltshift - (schulddossier) klant evaluatie
+    - id: c
+      # Analyse en evaluatie van meetresultaten
+      zoektermen:
+      - jaarevaluatie 2023
+      - evaluaties en bijsturing
+      - management review
+      - rode draad incidenten afwijkingen
+    - id: d
+      # Acties op basis van analyse-uitkomsten
+      zoektermen:
+      - management review
+      - conduction acties uit te voeren
+      - opvolging interne audit
+  '9.2':
+    titel: Interne audit
+    zoektermen:
+    - interne audit q
+    - auditplanning iso 9001
+    - opvolging interne audit
+    sub_punten:
+    - id: a
+      # Auditprogramma vastgesteld (frequentie, methoden, planning)
+      zoektermen:
+      - auditplanning iso 9001
+      - checklist-documentatie-iso-9001_2015-met-interne-auditplanning
+      - rol en instructie interne auditor conduction
+    - id: b
+      # Auditoren onafhankelijk en competent
+      zoektermen:
+      - rol en instructie interne auditor conduction
+      - syllabus-interne-audit-cursus
+      - hand-out-interne-audit-cursus
+      - de 12 gouden interne audit regels
+    - id: c
+      # Auditverslagen opgesteld en gerapporteerd
+      zoektermen:
+      - interne audit q1 2023
+      - interne audit q3 2022
+      - interne audit q4 2022
+      - interne audit q4 2023
+      - interne audit q1 2024
+      - interne audit q3 2024
+      - interne audit q4 2024
+      - interne audit -q1 2025
+      - interne audit -q2 2025
+      - interneauditrapportage-conduction
+    - id: d
+      # Auditbevindingen opgevolgd en gecorrigeerd
+      zoektermen:
+      - opvolging interne audit
+      - q12023 opvolging interne audits
+      - q3 en q4 2024 opvolging interne audit
+      - q42023 en q12024 opvolging interne audit
+  '9.3':
+    titel: Directiebeoordeling
+    zoektermen:
+    - management review 2026 iso 9001
+    - management review iso 9001
+    - instructie management review
+    sub_punten:
+    - id: a
+      # Verplichte inputs voor directiebeoordeling aanwezig
+      zoektermen:
+      - management review 2026 iso 9001
+      - management review iso 9001
+      - instructie management review
+      - agenda onderwerpen mt kwaliteit
+    - id: b
+      # Outputs/besluiten van directiebeoordeling vastgelegd
+      zoektermen:
+      - management review 2026 iso 9001
+      - management review iso 9001
+    - id: c
+      # Acties uit vorige directiebeoordeling opgevolgd
+      zoektermen:
+      - conduction acties uit te voeren
+      - opvolging interne audit
+      - reactie en acties nav
+  '10.1':
+    titel: Algemeen (verbetering)
+    zoektermen:
+    - evaluaties en bijsturing
+    - conduction acties uit te voeren
+    - jaarevaluatie 2023
+    sub_punten:
+    - id: a
+      # Verbetermogelijkheden geïdentificeerd en opgepakt
+      zoektermen:
+      - evaluaties en bijsturing
+      - conduction acties uit te voeren
+      - jaarevaluatie 2023
+    - id: b
+      # Verbetering gericht op klantwaarde
+      zoektermen:
+      - klanttevredenheid 2023
+      - nps plan klanttevredenheid
+  '10.2':
+    titel: Non-conformiteit en corrigerende maatregel
+    zoektermen:
+    - memo afwijking
+    - rode draad incidenten afwijkingen
+    - reactie en acties nav
+    sub_punten:
+    - id: a
+      # Reactie op non-conformiteit (direct herstel)
+      zoektermen:
+      - memo afwijking
+      - afwijking registratieformulier
+      - "definities en procedures: incident, afwijking en tekortkoming"
+    - id: b
+      # Oorzaakanalyse uitgevoerd
+      zoektermen:
+      - rode draad incidenten afwijkingen
+      - memo nc-2025 onvolledige evaluatie
+      - overzicht van soorten bevindingen
+    - id: c
+      # Vergelijkbare situaties onderzocht (herhalingspreventie)
+      zoektermen:
+      - rode draad incidenten afwijkingen
+      - reactie en acties nav
+    - id: d
+      # Effectiviteit van corrigerende maatregel beoordeeld
+      zoektermen:
+      - opvolging interne audit
+      - reactie en acties nav
+      - aantekeningen terugkoppeling hercertificeringsaudit
+  '10.3':
+    titel: Continue verbetering
+    zoektermen:
+    - evaluaties en bijsturing
+    - jaarevaluatie 2023
+    - aantekeningen terugkoppeling hercertificeringsaudit
+    sub_punten:
+    - id: a
+      # KMS-effectiviteit aantoonbaar verbeterd over tijd
+      zoektermen:
+      - management review
+      - evaluaties en bijsturing
+      - jaarevaluatie 2023
+    - id: b
+      # Verbeterinputs uit audits en reviews benut
+      zoektermen:
+      - aantekeningen terugkoppeling hercertificeringsaudit
+      - opvolging interne audit
+      - reactie en acties nav
+    - id: c
+      # Verbeterprojecten gepland en uitgevoerd (PDCA)
+      zoektermen:
+      - conduction aanpak iso 9001
+      - evaluaties en bijsturing
+      - conduction acties uit te voeren
