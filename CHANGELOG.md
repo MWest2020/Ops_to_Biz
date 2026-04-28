@@ -5,6 +5,29 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed — 2026-04-28 — argocd-sheets-sync systemd unit
+
+`argocd-sheets-sync.service` faalde sinds een onbekende datum met exit
+203/EXEC: `Unable to locate executable /home/gongoeloe/projects/Ops_to_Biz/sync.sh`.
+Oorzaak: `sync.sh` is bij eerdere reorganisatie verhuisd naar
+`argocd_sync/sync.sh`, maar de unit-files (zowel actieve user-unit als
+in-repo) wezen nog naar het oude pad.
+
+- `argocd_sync/systemd/argocd-sheets-sync.service`
+  - `ExecStart` → `…/Ops_to_Biz/argocd_sync/sync.sh` (was `…/Ops_to_Biz/sync.sh`).
+  - `After=` aangevuld met `mcc-login.service` zodat kubeconfig-refresh
+    eerst draait.
+  - `OnFailure=argocd-sync-failed-notify.service` toegevoegd. Beide stonden
+    wél in de actieve user-unit, niet in de in-repo bron.
+- `~/.config/systemd/user/argocd-sheets-sync.{service,timer}` — vervangen
+  door symlinks naar `argocd_sync/systemd/…`. Originele files bewaard als
+  `*.bak.20260428`. Source-of-truth nu in repo (consistent met dagcheck).
+- **Test:** `systemctl --user daemon-reload && systemctl --user start
+  argocd-sheets-sync.service` — `sync.sh` start nu correct, fetcht 193
+  ArgoCD apps. Faalt daarna in `argocd_sync/output/gws.py:25` op
+  `gws sheets values get` (CalledProcessError exit 1) — separate Google
+  Sheets/`gws` CLI issue, niet onderdeel van deze fix.
+
 ### Added — 2026-04-20 — Finding classification v2 (refactor)
 
 - **`audit/finding_classification_20260420.py`** (nieuw, originele file ongewijzigd)

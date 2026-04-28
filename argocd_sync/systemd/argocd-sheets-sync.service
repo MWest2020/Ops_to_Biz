@@ -1,12 +1,13 @@
 [Unit]
 Description=ArgoCD → Google Sheets sync
-After=network-online.target
+After=network-online.target mcc-login.service
 Wants=network-online.target
+OnFailure=argocd-sync-failed-notify.service
 
 [Service]
 Type=oneshot
 WorkingDirectory=/home/gongoeloe/projects/Ops_to_Biz
 EnvironmentFile=/home/gongoeloe/projects/Ops_to_Biz/.env
-ExecStart=/home/gongoeloe/projects/Ops_to_Biz/sync.sh
+ExecStart=/home/gongoeloe/projects/Ops_to_Biz/argocd_sync/sync.sh
 StandardOutput=journal
 StandardError=journal
