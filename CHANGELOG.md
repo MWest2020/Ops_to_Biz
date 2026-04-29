@@ -5,6 +5,42 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Added — 2026-04-29 — Nextcloud storage usage in argocd-sync
+
+Nieuwe kolom `nextcloud_storage_used` (bv `4.2G`) in zowel `Deployments`
+als `Business` tab van de gekoppelde Google Sheet, voor inzicht in actueel
+data-gebruik per Nextcloud-installatie.
+
+- `argocd_sync/storage.py` (nieuw) — haalt PVC-usage uit kubelet
+  `/stats/summary` voor CSI-volumes en uit `du -sh pvc-*` op
+  `nfs-server-provisioner-0` voor NFS-volumes; aggregeert alle PVCs
+  met "nextcloud" in de naam (excl. sidecars: mariadb, redis, postgres,
+  pgbouncer, imaginary, collabora, onlyoffice, elasticsearch) per
+  namespace.
+- `argocd_sync/enrich.py` (nieuw) — leest fetch-output, vult
+  `nextcloud_storage_used` op rijen die als Nextcloud-app classificeren
+  (`nc-{customer}-{env}` of legacy `*nextcloud*`). Aborteert hard als de
+  cluster-lookup faalt, zodat een verlopen kubeconfig geen lege strings
+  naar de Sheet schrijft.
+- `argocd_sync/upsert.py` — kolom toegevoegd aan `OWNED_COLUMNS`.
+- `argocd_sync/transform.py` — `pivot()` geeft `nextcloud_storage_used`
+  door naar de business view.
+- `argocd_sync/output/business_{gws,local}.py` — kolom toegevoegd
+  tussen product-booleans en versie-kolommen.
+- `argocd_sync/sync.sh` — extra enrich-stap tussen fetch en
+  output-writers; tmp-cleanup uitgebreid met `ENRICHED_FILE`.
+- **Test:** handmatige run `OUTPUT_MODE=gws ./argocd_sync/sync.sh` —
+  201 rijen naar `Deployments`, 107 naar `Business`. 101 Nextcloud-rijen
+  hebben een waarde, 5 leeg (namespaces bestaan niet meer in cluster:
+  acato, io, opengemeenten, openpdd-gooisemeren, tilburg-preprod;
+  identiek aan de bestaande versions-check failures).
+- **Bekende beperking:** in legacy namespaces met meerdere envs in één
+  ns (bv `alkmaar` met zowel accept als prod) krijgen alle business
+  rows van die namespace dezelfde waarde — de som van alle Nextcloud
+  PVCs in de ns. Voor nieuwe `nc-{customer}-{env}` namespaces is het
+  1-op-1 correct. Op te lossen door per PVC op app-naam te matchen
+  i.p.v. per namespace te aggregeren.
+
 ### Fixed — 2026-04-28 — argocd-sheets-sync systemd unit
 
 `argocd-sheets-sync.service` faalde sinds een onbekende datum met exit

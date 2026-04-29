@@ -62,6 +62,7 @@ def pivot(rows: list[dict]) -> list[dict]:
 
     # Track the nextcloud app name per (customer, environment) for exec resolution.
     nextcloud_app_names: dict[tuple[str, str], str] = {}
+    nextcloud_storage: dict[tuple[str, str], str] = {}
 
     for row in rows:
         if row.get("sync_status") == "[REMOVED]":
@@ -88,6 +89,7 @@ def pivot(rows: list[dict]) -> list[dict]:
 
         if product == "nextcloud":
             nextcloud_app_names[key] = (row.get("name", ""), row.get("namespace", ""))
+            nextcloud_storage[key] = row.get("nextcloud_storage_used", "")
 
     result = [
         {
@@ -95,6 +97,7 @@ def pivot(rows: list[dict]) -> list[dict]:
             "environment": environment,
             "nextcloud_app_name": nextcloud_app_names.get((customer, environment), ("", ""))[0],
             "nextcloud_namespace": nextcloud_app_names.get((customer, environment), ("", ""))[1],
+            "nextcloud_storage_used": nextcloud_storage.get((customer, environment), ""),
             **products,
         }
         for (customer, environment), products in grouped.items()

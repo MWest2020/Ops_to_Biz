@@ -12,7 +12,7 @@ from transform import pivot, PRODUCT_COLUMNS
 from versions import enrich_with_versions, TARGET_APPS
 
 OUTPUT_PATH = os.environ.get("BUSINESS_OUTPUT_PATH", "argocd_business.xlsx")
-HEADERS = ["customer_name", "environment"] + PRODUCT_COLUMNS + TARGET_APPS
+HEADERS = ["customer_name", "environment"] + PRODUCT_COLUMNS + ["nextcloud_storage_used"] + TARGET_APPS
 
 
 def main(new_rows_path: str) -> None:

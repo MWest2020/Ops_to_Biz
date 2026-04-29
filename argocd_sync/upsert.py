@@ -26,6 +26,7 @@ OWNED_COLUMNS: list[str] = [
     "app_type",
     "team",
     "removed_at",
+    "nextcloud_storage_used",
 ]
 
 _REMOVED_STATUS = "[REMOVED]"

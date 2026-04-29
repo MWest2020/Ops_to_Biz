@@ -13,7 +13,7 @@ from output.gws import _col_letter, _env, ensure_tab_exists
 
 SPREADSHEET_ID = os.environ["GOOGLE_SPREADSHEET_ID"]
 BUSINESS_TAB = "Business"
-HEADERS = ["customer_name", "environment"] + PRODUCT_COLUMNS + TARGET_APPS
+HEADERS = ["customer_name", "environment"] + PRODUCT_COLUMNS + ["nextcloud_storage_used"] + TARGET_APPS
 
 
 def main(new_rows_path: str) -> None:
