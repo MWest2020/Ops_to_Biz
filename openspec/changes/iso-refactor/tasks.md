@@ -67,13 +67,13 @@
 ### 2.2 Module-migratie (kern, niet-source-specifiek)
 
 - [x] 2.2.1 Migreer `Ops_to_Biz/audit/store.py` → `src/iso_audit/store.py` (schema ongewijzigd voor milestone B; `decisions`- en `classifications`-tabellen komen later in deze milestone resp. milestone C) — PR #2: 12 tests, coverage 98% op module
-- [ ] 2.2.2 Migreer `audit/auth.py` en `audit/notification.py` → `src/iso_audit/` (path-imports updaten)
+- [x] 2.2.2 Migreer `audit/auth.py` en `audit/notification.py` → `src/iso_audit/` (path-imports updaten) — PR #5: 39 tests + google-api-python-client + google-auth runtime deps + mypy overrides voor packages zonder py.typed
 - [x] 2.2.3 Migreer `audit/normteksten.py` → splits naar `src/iso_audit/data/normteksten/iso9001.py` + `iso27001.py` + `__init__.py` met re-export (open-question-resolutie: korte termijn doen, YAML-migratie blijft eigen change na milestone C) — PR #3: 22 tests + lookup/available API + Cyrillic-typo-fixes. Bekende data-gap: 27001 §10.2 ontbreekt in bron
 - [x] 2.2.4 Migreer `audit/clause_mapping.py` → `src/iso_audit/classification/clause_mapping.py` — PR #4: 13 tests + pyyaml dep + importlib.resources padresolutie + types-PyYAML dev-dep
-- [ ] 2.2.5 Ontvlecht `audit/finding_classification.py` en `audit/finding_classification_20260420.py`: documenteer in commit-message dat `_20260420.py` regel 645 importeert uit het oude bestand; consolideer naar `src/iso_audit/classification/findings.py` met behoud van beide functionaliteiten
-- [ ] 2.2.6 Migreer `audit/thema_classifier.py` → `src/iso_audit/classification/thema.py`
-- [ ] 2.2.7 Migreer `audit/llm_classifier.py` → `src/iso_audit/classification/llm.py`
-- [ ] 2.2.8 Verplaats inline classifier-prompts naar `src/iso_audit/classification/prompts/<versie>.md` per requirement; refactor classifier-code om prompts uit bestand te laden
+- [ ] 2.2.5 Ontvlecht `audit/finding_classification.py` en `audit/finding_classification_20260420.py`: documenteer in commit-message dat `_20260420.py` regel 645 importeert uit het oude bestand; consolideer naar `src/iso_audit/classification/findings.py` met behoud van beide functionaliteiten — *BLOCKED: vereist eerst PR #2 (store) + PR #4 (clause_mapping) gemerged op main + §2.3 (drive_ingest) + §2.4 (miro_ingest) gedaan*
+- [x] 2.2.6 Migreer `audit/thema_classifier.py` → `src/iso_audit/classification/thema.py` — PR #6: 24 tests + anthropic + python-dotenv deps + THEMA_LIJST/THEMA_REGELS/bepaal_thema geconsolideerd uit tabular_report (bron-of-truth)
+- [ ] 2.2.7 Migreer `audit/llm_classifier.py` → `src/iso_audit/classification/llm.py` — *BLOCKED: vereist PR #2 (store) + PR #3 (normteksten) gemerged op main; module importeert anders runtime niet*
+- [ ] 2.2.8 Verplaats inline classifier-prompts naar `src/iso_audit/classification/prompts/<versie>.md` per requirement; refactor classifier-code om prompts uit bestand te laden — *pending op §2.2.5/2.2.7*
 
 ### 2.3 Source-adapters (eerlijke decompositie)
 

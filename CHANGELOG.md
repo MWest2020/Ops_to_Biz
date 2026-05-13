@@ -5,6 +5,15 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-13 — Milestone B van iso-refactor: +2 PRs op iso-audit (totaal 6)
+
+Vervolg-PRs op de iso-refactor (zie eerdere entry voor PR #1-#4):
+
+- **PR #5** `feat/milestone-b-auth-notification` — `audit/auth.py` + `audit/notification.py` → `src/iso_audit/` (§2.2.2). 39 tests, `google-api-python-client` + `google-auth` runtime-deps, mypy overrides voor packages zonder `py.typed` marker.
+- **PR #6** `feat/milestone-b-thema-classifier` — `audit/thema_classifier.py` → `src/iso_audit/classification/thema.py` (§2.2.6). 24 tests. `THEMA_LIJST` + `THEMA_REGELS` + `bepaal_thema()` geconsolideerd uit `tabular_report.py` — `thema.py` is nu de bron-of-truth voor de taxonomie. `anthropic` + `python-dotenv` runtime-deps.
+
+**Blocked tot upstream-merges**: §2.2.5 finding_classification consolidatie (vereist PR #2 store + PR #4 clause_mapping + §2.3 drive_ingest + §2.4 miro_ingest), §2.2.7 llm_classifier migratie (vereist PR #2 + PR #3 normteksten). §2.2.8 prompts→bestanden pending op §2.2.5/2.2.7.
+
 ### Changed — 2026-05-13 — Milestone B van iso-refactor: 4 PRs op iso-audit repo
 
 Voortgang van de iso-refactor in de standalone `MWest2020/iso-audit` repo
