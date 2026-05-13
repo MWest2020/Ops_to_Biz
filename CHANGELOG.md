@@ -5,6 +5,350 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed — 2026-05-13 — `.gitignore` mist `output/` als directory
+
+`.gitignore` had alleen `output/__pycache__/` staan; de hele `output/`-tree was
+**untracked maar niet ignored**. Een `git add .` of `git add output/` zou
+audit-databases, PDF-rapporten en logs (potentieel met persoonsgegevens) hebben
+gecommit. Regel toegevoegd: `output/` (vervangt `output/__pycache__/`). Bestaande
+untracked items in `output/` worden nu correct genegeerd (`git check-ignore` bevestigd).
+
+### Changed — 2026-05-13 — Auditmemo management v2 (feedback Marianne Poot)
+
+Tweede versie van de auditmemo voor MT-bespreking, gebaseerd op feedback van
+Marianne Poot (hoofd ISO) op v1. Nieuw bestand
+`output/audit_reports/management_memo_2026-05-06/Auditmemo_management_2026-05-06_v2.{html,pdf}`
+(v1 + PDF blijven naast v2 staan voor audit-trail).
+
+- **Nieuwe Context-sectie** — auditcyclus, geaudite scope (9001 §4-10 + 27001
+  §4-10 incl. Annex A), geraadpleegde bronnen, voorbehoud toolscope (Jira/Calendar/
+  Notion/Slack buiten Drive) met oplossing (aanvullend interview), bespreking
+  6 mei 2026 met hoofd ISO.
+- **NC 1** — "Aanbeveling" → "Vereiste corrigerende maatregel"; norm + letterlijke
+  tekst van ISO 9001/27001 §10.2 toegevoegd; effectiviteits-evaluatie als ontbrekend
+  element expliciet benoemd (Marianne's eigen observatie).
+- **NC 2** — Alex-casus verwijderd (niet onderbouwd in audit-data); alleen Goya;
+  norm + letterlijke tekst van ISO 27001 §6.5, §5.11 en §5.18 toegevoegd; drie
+  ontbrekende elementen concreet uitgesplitst.
+- **Verbeterpunt logging** — norm + letterlijke tekst van Annex A §8.15 en §8.16
+  toegevoegd; expliciet blok "Waarom verbeterpunt en geen NC?".
+- **Nieuwe sectie "Status eerder geconstateerde NC's"** — tabel met externe
+  controles 2023 + 2024 en v3.3 NC's voor afvinken in volgende MT.
+
+### Changed — 2026-05-05 — Audit-rapport v2.5 — bug-fixes op v2 review
+
+Zeven correcties op `audit/v2_handmatig.py` na review-feedback op v2-rapport.
+Output naar nieuwe directory `output/audit_reports/audit_2026-05-04_handmatig_v25/`
+zodat v2 als audit-trail blijft bestaan.
+
+- **§4 / §5 norm-split gefixt**: `klopt_norm()` filterde op clausule-prefix 4–10,
+  waardoor alle 27001 Annex A bevindingen (5.x–8.x) ook in §4 (9001) belandden
+  en §5 leeg bleef. Nu wordt op de `norm`-kolom uit CSV gefilterd; "beide" gaat
+  naar §5. Resultaat: §4 toont nu 10 9001-clausules, §5 toont 69 27001-controls.
+- **Aanbevelingen — clausule-sortering** (`render_aanbevelingen`): clausules
+  per thema werden alfabetisch gesorteerd, waardoor "10.x" voor "4.x" kwam en
+  truncatie op 6 items toevallig identieke lijsten gaf voor de top-2 thema's.
+  Nu sortering op aantal OFI's per clausule, met aantal in de output ("10.2 (11),
+  8.16 (6), ..."). Lost ook "...." (4 dots) op door cleane "+ N andere" suffix.
+- **Voorbeelden in §3 verwijzen naar §-anker**: was "Voorbeeldbevindingen in
+  §4 / §5"; nu top-2 clausules met aantal en juiste sectie-nummer ("§4 clausule
+  10.2 (11 OFI's) en §4 clausule 8.16 (6 OFI's)").
+- **Aanbeveling 6 voor 'Overig'**: 110 niet-thematisch-geclusterde OFI's kregen
+  in v2 alleen een verwijzing naar de Excel; nu een eigen SMART-aanbeveling met
+  KAM-coördinator als eigenaar voor handmatige triage richting v3.
+- **§6.1 confidence-tabel**: kop "Onderbouwing per OFI" + intro "44% van OFI's"
+  was inconsistent met tabel die ook positief + geen-bevinding telde. Tabel nu
+  alleen OFI's; totalen kloppen 1-op-1 met aanbevelingen-cijfers.
+- **§6.2 NC-trigger-rule kandidaten zichtbaar**: was alleen beleidsstatement;
+  nu altijd berekend (54 kandidaten op 4-mei CSV) en als tabel getoond met
+  expliciete auditor-afweging-tekst (geen retroactieve promotie naar NC, met
+  reden volgens ISO 19011). Geeft Marianne en externe certificeerder het
+  audit-spoor. `detect_nc_triggers()` toegevoegd naast `reclassify_nc()` — die
+  laatste muteert wel, eerste niet.
+- **§6.2 traceerbaarheid per kandidaat**: generieke groepsverklaring vervangen
+  door per-item-afweging. Tool leest `SRC_DIR/NC_afwegingen_2026-05-04.csv`
+  (kolommen: `clausule`, `document_naam`, `triggers`, `auditor_nc_review`,
+  `auditor_nc_note`). Bestand wordt automatisch als lege template aangemaakt
+  bij eerste run; auditor vult per kandidaat in, tool merget bij volgende run.
+  §6.2 toont nu "X van 54 beoordeeld, Y nog open" + tabel met afweging-kolom.
+  Standaard-beoordelingsgronden (ISO 19011) expliciet vermeld: "Bewijs aanwezig
+  elders" / "Correctieve actie reeds in gang" / "Procedureel — werking
+  aantoonbaar" / "Geen feitelijk hiaat".
+- **AI-jargon 'formalisering'**: vijf voorkomens in onderbouwing-tekst uit v1.
+  `sanitize_jargon()` toegevoegd: render-time vervanging van "formalisering" →
+  "vastlegging" (case-preserved). CSV/XLSX behouden raw v1-tekst voor audit-trail.
+  Ook `formalisering` toegevoegd aan `VERBODEN_AI_WOORDEN` als drift-vangnet.
+- **Footer**: "_Gegenereerd door geautomatiseerd audit-systeem (v2)_" verwijderd
+  ten gunste van neutraal "_Document datum: ... · Versie: v2.5_". Reviewer-tip:
+  expliciete AI-markering bevestigt Mariannes "lijkt door AI gegenereerd"-kritiek;
+  ondertekening door auditor is wat telt.
+
+Telling ongewijzigd: 0 NC, 299 OFI, 122 positief, 15 geen bevinding (totaal 436).
+
+### Changed — 2026-05-04 — Audit-rapport: structurele herziening (Fase 3)
+
+Op basis van Marks tips A/B/C: aanbevelingen vooraan, in 4-veld-format, summary
+ingekort. Doel: management krijgt eerst de acties, niet pas na 90 pagina's
+bevindingen.
+
+- **Nieuwe §3 Aanbevelingen** (`audit/local_report.py:_render_aanbevelingen`):
+  geprioriteerde tabel vóór de bevindingen-secties. Kolommen: # / Thema (aantal)
+  / Wat (deliverable) + Toets-criterium / Wie / Wanneer.
+  - NC-rijen eerst, gegroepeerd per documentbron (b.v. één rij voor alle 8
+    NC's uit `incidentrapport-2026-04-21-v0.9.docx`). Voorkomt onbruikbare
+    "Overig"-clustering die `bepaal_thema()` voor NC-beschrijvingen gaf.
+  - Top-5 OFI-rijen daarna, met data-gegrond `wat` en `toets` uit nieuwe dict
+    `_THEMA_AANBEVELING` (12 thema's × 4 velden: wat / wie / wanneer / toets +
+    norm-eis-koppeling).
+  - **Wie / Wanneer** worden bewust open gelaten als "(rol in te vullen)" /
+    "(deadline in te vullen)" — die staan niet in de auditdata en horen door
+    het MT te worden vastgesteld in de directiebeoordeling. Geen verzonnen
+    eigenaars meer.
+- **Sectie-nummering** verschoven: §1 Summary → §2 Resultaten → §2a OFI-uitleg
+  → §3 Aanbevelingen → §4 Bevindingen 9001 → §5 Bevindingen 27001 → §6
+  Ontbrekend → §7 Gearchiveerd → §8 Handtekening.
+- **§2a Wat zijn OFI's** ingekort tot alleen de definitie + verwijzing naar §3.
+  De Top-5 thema-tabel is verhuisd naar §3 in 4-veld-format.
+- **Management summary inkort** in `_management_summary_prompt`:
+  geen "drie verbetergebieden"-paragrafen meer (die staan in §3). Summary
+  beperkt tot intro + 1 alinea verwijzing → §3 + positieve bevindingen + 1
+  bridging-zin + 1 oordeel-zin. Max 200 woorden.
+- **Strikt oordeel** via `_oordeel_zin()`: bij NC > 0 schrijft de prompt nu
+  letterlijk voor: "De organisatie voldoet niet aan de norm vanwege N
+  geconstateerde non-conformiteiten; correctieve maatregelen vereist (zie §3)."
+  Voorheen kon het LLM hedgen met "voldoet onder voorbehoud" terwijl de
+  meta-tabel "**onvoldoende**" zei. Inconsistentie weg.
+- **Revisie-modus** (`_revise_summary_prompt`): naast cijfer-update ook expliciete
+  oordeel-update-instructie. Voorheen behield het LLM "voldoet aan de norm"
+  uit s05 ondanks dat de actuele DB 14 NC's heeft.
+- **Lead-auditor sectie** in s05 (Softwarecatalogus + Innovatie/AI) wordt in
+  revisie-modus verwijderd uit de summary; die acties zitten nu in §3.
+
+Verificatie via 8 geautomatiseerde checks (cijfers, §3+4-veld, §4 nummering,
+strikt oordeel, geen 'prominent', geen NC-woorden in §3, data-kwaliteit, auditor-
+frame). Alle 8 groen op beide outputs (`audit_2026-05-04_marianne` en
+`audit_2026-05-04_fulltest`). Beide hebben alle 6 formaten (md, html, docx, pdf,
+csv, xlsx).
+
+### Fixed — 2026-05-04 — Audit-rapport: 6 bugs uit handmatige review
+
+Na de eerste rapport-revisie heeft Mark zes structurele bugs in de outputs
+geïdentificeerd. Alle gefixt en geverifieerd via geautomatiseerde checks.
+
+- **Bug 1 (clausule_titel)** — `pipeline.py:run_report_only` had `clausules =
+  laad_clause_map(norm)` waar het `clause_map.get("clausules", {})` moest zijn.
+  Daardoor was elke titel-lookup een miss, met fallback op clausule_id zelf.
+  Resultaat: "Clausule 10.1: 10.1" in elke kop. Nu correct: "Clausule 10.1:
+  Algemeen (verbetering)".
+- **Bug 2 (lege OFI's)** — `audit/local_report.py:_render_clausules_met_themas`
+  toonde 142 OFI's zonder beschrijving + onderbouwing als losse bullets met
+  "_(geen beschrijving)_". Nu per thema/clausule samengevat: "X bevinding(en)
+  zonder inhoudelijke onderbouwing — geclassificeerd op basis van documenttitel;
+  vereist handmatige review" + bullet-lijst van Drive-links.
+- **Bug 3 (tel-inconsistentie)** — `local_report.py:schrijf_rapport` toonde
+  "Totaal" als `len(bevindingen)` (raw row count incl. 'geen bevinding'-rijen)
+  terwijl de classificatie-rijen NC+OFI+pos optelden. Nu aparte rij voor 'Geen
+  bevinding (uit data, niet geclassificeerd)' en totaal als som van alle vier
+  classificaties — sluit precies aan op het CSV-rijen-aantal.
+- **Bug 4 (Drive-rommel)** — documenten met "VERWIJDEREN", "TEMPLATE KOPIE
+  MAKEN" of "OUD:"-prefix verschenen als bevindingen. `pipeline.py` heeft nu
+  `_filter_ruis()` dat in `run_audit` én `run_report_only` deze documenten uit
+  de rapport-stream weert. DB blijft raw; alleen de rendering filtert. Resultaat:
+  487 → 476 bevindingen in rapport/CSV/XLSX (11 ruis-items weggefilterd).
+- **Bug H (dubbele kop)** — als titel == clausule_id (oude data): "Clausule X.Y:
+  X.Y". Nu: alleen "Clausule X.Y" in dat geval.
+- **Bug bonus (cijfer-mismatch revisie-modus)** — bij `AUDIT_BASIS_SUMMARY`
+  hield het LLM de cijfers uit s05 vast (309 OFI / 0 NC) terwijl de huidige DB
+  iets anders toonde. Revisie-prompt krijgt nu een ACTUELE CIJFERS-blok mee
+  (totalen + top-8 clusters per classificatie) met expliciete instructie de
+  cijfers te updaten. Tekstuele structuur en formuleringen blijven, alleen
+  cijfers worden ververst.
+- **Tip G (data-kwaliteit-disclaimer)** — `local_report.py` voegt nu een regel
+  toe aan de management summary: "X van Y OFI's (Z%) zijn geclassificeerd op
+  basis van documenttitel zonder inhoudelijke analyse. Deze vereisen handmatige
+  review voordat ze in een actieplan worden opgenomen." Eerlijkheid over
+  audit-grond.
+- **Bug bonus (HTML/DOCX/PDF in run_audit)** — eerder zaten deze conversies
+  alleen in `run_report_only`. Nu ook in `run_audit`, zodat full-pipeline-runs
+  alle 6 formaten produceren zonder handmatige naconversie.
+
+Verificatie via `output/audit_reports/audit_2026-05-04_marianne/` (revisie) en
+`audit_2026-05-04_fulltest/` (data-modus). Alle 6 checks groen.
+
+### Changed — 2026-05-04 — Audit-rapport taal voor management (n.a.v. feedback Marianne)
+
+Marianne heeft op 2026-05-04 op rapport s05 (2026-04-20) zes punten teruggegeven:
+auditor-frame i.p.v. organisatie-frame, SMART-eis per thema, bridging bij gemengde
+clusters, ISO-jargon vertalen, OFI uitleggen + aggregeren, geen NC-woorden in
+aanbevelingen. Doel: management krijgt handelingsperspectief uit het rapport.
+
+- `audit/report_generation.py`:
+  - `_management_summary_prompt` herschreven: auditor-frame ("uit de audit blijkt"),
+    SMART-blok per thema (constatering met concrete documenten + actie + eigenaar/
+    horizon), verplichte bridging-zin als clausule >5 OFI én >5 positief heeft,
+    jargon-vertaling expliciet (8.16 → "diensten van derden"; 4.1 → "inzicht in
+    markt/klanten/stakeholders"), verbod op woorden "prominent", "drie kritieke
+    gebieden", placeholders zoals `[rol]`/`[datum]`.
+  - `_genereer_management_summary`: `max_tokens` verhoogd naar 2000 zodat
+    SMART-blokken niet afgekapt worden.
+  - `_top3_aanbevelingen` herschreven naar LLM-call met positieve template ("doe X
+    om Y te bereiken"), met fallback op feitelijke top-3 bij API-failure.
+  - `check_verboden_woorden()` + `VERBODEN_AANBEVELING_WOORDEN`: post-validatie van
+    NC-woorden in aanbevelingen-output (logging-warning).
+- `audit/local_report.py`:
+  - Nieuwe sectie 2a "Wat zijn OFI's" met definitie + Top-5 thema-aggregatie­tabel
+    (thema, aantal, voorgestelde aanpak) bovenaan de bevindingen-secties. "Overig"
+    fallback-bucket uitgesloten uit top-5; aparte voetnoot.
+  - `_THEMA_AANPAK` mapping voor voorgestelde aanpak per thema.
+- `audit/pipeline.py`:
+  - Nieuwe flag `--report-only`: regenereert rapport vanuit bestaande
+    bevindingen-DB (`output/audit.db`) zonder Drive/Miro/classificatie. Eén
+    Claude-call (~5 cent) i.p.v. volledige re-classificatie. Doel: snel itereren
+    op rapport-taal zonder kosten op classificatie-laag.
+- `openspec/changes/audit-rapport-management-taal/`: change-proposal, tasks,
+  spec-deltas voor `report-generation`-capability.
+- `output/audit_reports/before_after_management_summary.md`: voor- en na-tekst
+  per kritiekpunt op basis van echte s05-cijfers (309 OFI / 0 NC / 123 positief);
+  basis voor overleg met Marianne.
+- `output/audit_reports/audit_2026-05-04/`: nieuwe rapport-subfolder. Bevat alle
+  formaten (md, html, docx, pdf, csv, xlsx). Sheets-sync wordt uitgevoerd als
+  `AUDIT_SHEETS_ID` env var gezet is.
+- Per-run subfolder: `audit/local_report.py` en `audit/tabular_report.py` schrijven
+  output nu in `output/audit_reports/audit_<datum>/`. Override via `AUDIT_RUN_ID`
+  (alleen subfolder-naam, vrij formaat) of `LOCAL_REPORT_DIR` (volledig pad).
+  Bestaande s05-output verplaatst naar `audit_2026-04-20_s05/`.
+- Haiku review-loop (10 iteraties, ~30 cent totaal): convergentie bereikt — alle
+  6 Marianne-criteria onafgebroken VOLDAAN sinds iter 4. Iter 8 en 10 oordeel
+  KLAAR/VERBETER met alleen micro-restpunten. Logbestanden in
+  `output/haiku_iteraties/iter_03.txt` t/m `iter_10.txt` voor audit-trail.
+- `audit/_haiku_review.py`: tijdelijk hulpmiddel voor de loop. Stuur huidig
+  rapport door Haiku, vergelijk met Marianne's feedback, geef VOLDAAN/DEELS/NIET
+  per punt + KLAAR/VERBETER eindoordeel. Niet onderdeel van de pipeline.
+
+**Validatie**: één test-run met `--report-only --norm beide` succesvol. Rapport
+bevat de zes correcties die Marianne vroeg. Volledige re-classificatie (full
+pipeline-run) bewust niet uitgevoerd: feedback raakt taal, niet classificatie;
+herclassificatie van 309 OFI's zou onnodig duur zijn.
+
+**Open**: Marianne-akkoord op nieuwe vorm tijdens overleg vóór archivering van
+de OpenSpec-change. Eén minor restpunt: LLM-summary noemt soms `[datum audit]`
+als metadata-veld bovenaan; datum staat al in de meta-tabel — kan eventueel
+post-fix met regex strip of expliciete prompt-instructie.
+
+### Changed — 2026-05-01 — argocd_sync schrijft Sheets via service account (geen `gws` CLI meer)
+
+De dagelijkse browser-verificatie van de derde-partij `gws` CLI was de
+laatste werkelijke afhankelijkheid waardoor de timer regelmatig in een
+SKIP eindigde. De Sheets-uitvoer maakt nu rechtstreeks gebruik van de
+Google Sheets API met een service account + domain-wide delegation —
+zelfde patroon als de audit-pipeline (`audit/gsa_client.py`).
+
+- `argocd_sync/sheets_client.py` (nieuw) — minimale Sheets API wrapper
+  met `lru_cache`'d credentials/service. Functies: `get_values`,
+  `ensure_tab`, `clear_range`, `batch_update_values`, `col_letter`.
+  Subsystemen blijven onafhankelijk (per `CLAUDE.md`-conventie); geen
+  import van `audit/`.
+- `argocd_sync/output/gws.py` — herschreven, geen `subprocess`-calls
+  naar `gws` meer. Module-naam blijft `gws.py` zodat `OUTPUT_MODE=gws`
+  en `sync.sh` ongewijzigd werken.
+- `argocd_sync/output/business_gws.py` — idem; importeert `_col_letter`
+  / `ensure_tab_exists` niet meer uit `output.gws` maar uit
+  `sheets_client`.
+- **Env-vars (volgorde van prioriteit):**
+  - `GOOGLE_SERVICE_ACCOUNT_FILE` (voorkeur, gelijk aan audit-pipeline)
+  - `GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE` (legacy alias, blijft werken)
+  - `GOOGLE_IMPERSONATE_USER` (verplicht; zelfde gebruiker als audit)
+- **Vereist eenmalige actie:** de SA die argocd_sync gebruikt moet in
+  Google Workspace admin (Security → API controls → Domain-wide
+  delegation) de scope `https://www.googleapis.com/auth/spreadsheets`
+  hebben. Snelste route: zet `GOOGLE_SERVICE_ACCOUNT_FILE=audit/config/
+  service_account.json` in `.env` — die SA heeft Sheets DWD al
+  geautoriseerd voor de audit-pipeline. Alternatief: voeg de scope toe
+  aan de legacy `gws-credentials.json` SA in Workspace admin.
+- **Test (gedeeltelijk, 2026-05-01 13:14):** handmatige run faalde nog
+  op `unauthorized_client: ... not authorized for any of the scopes
+  requested` — dat is precies het scope-config-issue hierboven, niet
+  een codebug. Soft-fail werkt: service exit `0/SUCCESS`, één SKIP-regel
+  in journal, geen broadcast. Eerdere stappen (fetch 193 apps, enrich
+  101 rijen) zijn wel goed gegaan.
+- **Vervolgstap voor de gebruiker:** kies optie A of B uit de
+  Workspace-admin-config hierboven, dan opnieuw
+  `systemctl --user start argocd-sheets-sync.service` om end-to-end te
+  bevestigen.
+- `.env.example` — gws-sectie bijgewerkt: oude "GCP service account
+  JSON key file" comment vervangen door uitleg dat argocd_sync nu via
+  de Sheets API werkt en dezelfde `GOOGLE_SERVICE_ACCOUNT_FILE` /
+  `GOOGLE_IMPERSONATE_USER` env-vars gebruikt als de audit-pipeline.
+  `GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE` blijft als legacy alias.
+- `~/.claude/hooks/pre-tool-use.sh` (buiten dit repo) — allowlist
+  toegevoegd voor `.env.example` / `.env.sample` / `.env.template` (en
+  dash-varianten) zodat template-bestanden bewerkt mogen worden;
+  echte `.env` en `.env.local`-achtigen blijven geblokkeerd.
+
+### Fixed — 2026-05-01 — mcc-login wacht op werkende DNS bij boot
+
+Tijdens hetzelfde incident bleek de eigenlijke onderliggende oorzaak:
+`mcc-login.service` (waar `argocd-sheets-sync.service` met
+`After=mcc-login.service` aan vasthangt) draaide bij boot om 07:51
+nadat de timer met `Persistent=true` de gemiste 05:00-run inhaalde,
+maar `network-online.target` is op deze workstation al ready voordat
+DNS via het corp/VPN-pad werkelijk bereikbaar is. De `mcc` CLI kreeg
+`network is unreachable` op `api.emk.fuga.cloud`. De python-wrapper
+logde `Warning: ... (partial success possible)` en exit'te 0, dus
+systemd zag de service als geslaagd terwijl de kubeconfig nooit
+ververst werd — daardoor faalde `enrich.py` later op een lege
+`kubectl get pvc` output.
+
+- `~/.config/systemd/user/mcc-login.service` — `ExecStartPre=` regel
+  toegevoegd die in een `for`-loop tot 60 seconden wacht op
+  `getent hosts api.emk.fuga.cloud`. Bij timeout exit 1 met een duidelijk
+  journal-bericht; main `ExecStart` wordt dan niet uitgevoerd. Geen
+  `OnFailure=` ingesteld, dus een timeout is een stille failure
+  (alleen status-flag in `systemctl status`).
+- `systemctl --user daemon-reload` uitgevoerd.
+- **Test 1:** handmatige `systemctl --user start mcc-login.service` —
+  `[mcc] Daily signin completed successfully!` in journal, alle drie
+  clusters (test-accept, conductionprod, con-prod) toegevoegd, kubeconfig
+  bijgewerkt.
+- **Test 2:** end-to-end, handmatige `systemctl --user start
+  argocd-sheets-sync.service` — fetch (193 apps) + enrich (685 PVCs,
+  258 Nextcloud-PVCs, 101 rijen verrijkt) draaiden zonder fouten. De
+  `gws`-output stap viel om op een verlopen `gws` auth-token, en de
+  soft-fail uit het eerdere changelog-item ving dat netjes op met één
+  regel `SKIP: output/gws.py exited 1`. Service exit `0/SUCCESS`, geen
+  broadcasts. Hele keten gedraagt zich nu zoals bedoeld.
+- **Niet gewijzigd:** de python-wrapper `~/CONDUCTION/toolchain/mcc/cli.py`
+  zelf — die slikt nog steeds netwerkfouten en exit 0 met een warning.
+  Voor nu acceptabel omdat de `ExecStartPre` precies dat scenario
+  voorkomt; eventueel later strakker maken in de toolchain repo.
+
+### Changed — 2026-05-01 — argocd-sync timer faalt nu stil
+
+Na een incident waarbij het dagelijkse `argocd-sheets-sync.timer` de
+gebruikerssessie verstoorde (oorzaak: `OnFailure=` triggerde
+`wall --nobanner` naar alle TTYs/pty's bij elke transient fout — stale
+`gws` token op 2026-04-30, niet-bereikbare ArgoCD-host op 2026-05-01
+boot voordat het netwerk klaar was) zijn de volgende wijzigingen
+doorgevoerd zodat de timer "convenience-friendly" wordt: geen broadcasts,
+audit-trail blijft volledig in journald.
+
+- `~/.config/systemd/user/argocd-sheets-sync.service` — `OnFailure=
+  argocd-sync-failed-notify.service` regel verwijderd.
+- `~/.config/systemd/user/argocd-sync-failed-notify.service` — verwijderd
+  (`wall`-broadcast was de oorzaak van de sessie-verstoring).
+- `argocd_sync/sync.sh` — elke python-stap (`fetch.py`, `enrich.py`,
+  `output/{local,gws,business_local,business_gws}.py`) wordt nu omhuld
+  met een `set +e` / `rc=$?` / `set -e` blok plus een `skip_if_failed`
+  helper. Bij non-zero exit logt het script één regel
+  `"[sync] SKIP: <step> exited <rc>..."` en exit 0. De volledige
+  stack-trace blijft in journald via `StandardError=journal`.
+- `systemctl --user daemon-reload` uitgevoerd.
+- **Test:** `bash -n sync.sh` (syntax OK). Eerstvolgende geplande run is
+  `*-*-* 06:00:00` (volgende ochtend); journal moet dan een SKIP- of
+  succes-regel tonen, geen `wall`-broadcast meer.
+- **Niet gewijzigd:** `.bak.20260428` files in `~/.config/systemd/user/`
+  (eerdere baseline, niet aangeraakt).
+
 ### Added — 2026-04-29 — Nextcloud storage usage in argocd-sync
 
 Nieuwe kolom `nextcloud_storage_used` (bv `4.2G`) in zowel `Deployments`

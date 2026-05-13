@@ -28,9 +28,10 @@ htmlcov/
 .coverage
 *.cover
 
-# Output artefacts
+# Output artefacts — alle audit-rapporten, databases, logs en presentaties.
+# Bevat (potentieel) persoonsgegevens en audit-bewijs; mag nooit in een repo.
 *.xlsx
-output/__pycache__/
+output/
 
 # Claude
 .claude/settings.local.json
