@@ -5,6 +5,27 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-13 — Milestone B van iso-refactor: 4 PRs op iso-audit repo
+
+Voortgang van de iso-refactor in de standalone `MWest2020/iso-audit` repo
+(zie `~/projects/iso-audit/`). Vier PR's geopend, alle CI groen:
+
+- **PR #1** `feat/milestone-b-baseline` — fixture-data + snapshot-tests (§2.1.1, §2.1.2)
+  + coverage-baseline gemeten (0% op huidig `audit/`, geen tests) (§2.1.3)
+  + CI gate 60→70% (§2.1.4).
+- **PR #2** `feat/milestone-b-store-migration` — `audit/store.py` → `src/iso_audit/store.py`
+  (§2.2.1). Schema-stabiel, 12 unit-tests, 98% coverage op module.
+- **PR #3** `feat/milestone-b-normteksten-split` — `audit/normteksten.py` (2956 regels)
+  → `data/normteksten/{iso9001,iso27001}.py` + `__init__.py` re-export (§2.2.3).
+  22 tests + `lookup()`/`available()` API. Bekende data-gap: 27001 §10.2 ontbreekt
+  in bron-dict.
+- **PR #4** `feat/milestone-b-clause-mapping` — `audit/clause_mapping.py`
+  → `classification/clause_mapping.py` (§2.2.4). 13 tests + `pyyaml` runtime-dep
+  + `types-PyYAML` dev-dep + `importlib.resources` voor padresolutie.
+
+`tasks.md` bijgewerkt: §2.1 alles afgevinkt; §2.2.1, §2.2.3, §2.2.4 afgevinkt;
+§2.2.2 (auth+notification), §2.2.5 (classifier consolidatie), §2.2.6-2.2.8 open.
+
 ### Fixed — 2026-05-13 — `.gitignore` mist `output/` als directory
 
 `.gitignore` had alleen `output/__pycache__/` staan; de hele `output/`-tree was

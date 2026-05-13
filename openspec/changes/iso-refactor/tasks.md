@@ -59,17 +59,17 @@
 
 ### 2.1 Voorbereiding en baseline
 
-- [ ] 2.1.1 Maak `examples/fixture-audit-2026-q1/` met geanonimiseerde sample-CSV (≤20 rijen) + sample-rapport + README — *deels: skeleton + README done in PR #1 (2026-05-13); data-vulling volgt in `feat/milestone-b-fixture-data`*
-- [ ] 2.1.2 Schrijf snapshot-tests in `tests/classification/test_findings_snapshot.py` die fixture-CSV door classifier draaien en byte-identiek match vereisen op `parsed_klasse` en `parsed_clausule` (baseline gegenereerd vóór refactor) — *pending op 2.1.1 data-vulling*
+- [x] 2.1.1 Maak `examples/fixture-audit-2026-q1/` met geanonimiseerde sample-CSV (≤20 rijen) + sample-rapport + README — PR #1: README + `generate_fixture.py` + `findings.csv` (20 rijen: 2 NC, 10 OFI, 7 positief, 1 geen-bevinding) + `findings.expected.csv`. sample-rapport.md uitgesteld tot §2.5
+- [x] 2.1.2 Schrijf snapshot-tests in `tests/classification/test_findings_snapshot.py` die fixture-CSV door classifier draaien en byte-identiek match vereisen op `parsed_klasse` en `parsed_clausule` (baseline gegenereerd vóór refactor) — PR #1: self-consistency + selectie-criteria tests groen; classifier-output test skipt automatisch tot §2.2.5 classifier landt
 - [x] 2.1.3 Meet test-coverage baseline op huidig `Ops_to_Biz/audit/`-codebase (kopie naar tijdelijke iso-audit-branch); bepaal definitieve gate `max(baseline + 5%, 70%)`, plafond 85% — baseline = 0% (geen tests in `Ops_to_Biz/audit/`); gate = 70%
 - [x] 2.1.4 Update CI-config: `--cov-fail-under=<gate>` met definitieve waarde — 60 → 70 in `.github/workflows/ci.yml` (PR #1)
 
 ### 2.2 Module-migratie (kern, niet-source-specifiek)
 
-- [ ] 2.2.1 Migreer `Ops_to_Biz/audit/store.py` → `src/iso_audit/store.py` (schema ongewijzigd voor milestone B; `decisions`- en `classifications`-tabellen komen later in deze milestone resp. milestone C)
+- [x] 2.2.1 Migreer `Ops_to_Biz/audit/store.py` → `src/iso_audit/store.py` (schema ongewijzigd voor milestone B; `decisions`- en `classifications`-tabellen komen later in deze milestone resp. milestone C) — PR #2: 12 tests, coverage 98% op module
 - [ ] 2.2.2 Migreer `audit/auth.py` en `audit/notification.py` → `src/iso_audit/` (path-imports updaten)
-- [ ] 2.2.3 Migreer `audit/normteksten.py` → splits naar `src/iso_audit/data/normteksten/iso9001.py` + `iso27001.py` + `__init__.py` met re-export (open-question-resolutie: korte termijn doen, YAML-migratie blijft eigen change na milestone C)
-- [ ] 2.2.4 Migreer `audit/clause_mapping.py` → `src/iso_audit/classification/clause_mapping.py`
+- [x] 2.2.3 Migreer `audit/normteksten.py` → splits naar `src/iso_audit/data/normteksten/iso9001.py` + `iso27001.py` + `__init__.py` met re-export (open-question-resolutie: korte termijn doen, YAML-migratie blijft eigen change na milestone C) — PR #3: 22 tests + lookup/available API + Cyrillic-typo-fixes. Bekende data-gap: 27001 §10.2 ontbreekt in bron
+- [x] 2.2.4 Migreer `audit/clause_mapping.py` → `src/iso_audit/classification/clause_mapping.py` — PR #4: 13 tests + pyyaml dep + importlib.resources padresolutie + types-PyYAML dev-dep
 - [ ] 2.2.5 Ontvlecht `audit/finding_classification.py` en `audit/finding_classification_20260420.py`: documenteer in commit-message dat `_20260420.py` regel 645 importeert uit het oude bestand; consolideer naar `src/iso_audit/classification/findings.py` met behoud van beide functionaliteiten
 - [ ] 2.2.6 Migreer `audit/thema_classifier.py` → `src/iso_audit/classification/thema.py`
 - [ ] 2.2.7 Migreer `audit/llm_classifier.py` → `src/iso_audit/classification/llm.py`
