@@ -2,67 +2,67 @@
 
 ### 1.1 Repo-setup en infrastructuur
 
-- [ ] 1.1.1 Maak GitHub-repo `MWest2020/iso-audit` aan (private)
-- [ ] 1.1.2 Configureer branch protection op `main`: required PR reviews (≥1), required status checks (alle CI-jobs), no force-push, no direct pushes
-- [ ] 1.1.3 Configureer required signed commits (GPG of SSH-signing)
-- [ ] 1.1.4 Indien Enterprise-tier beschikbaar: enable Audit Log; anders maak `compensating-control.md` met beschrijving van alternatieve audit-trail-borging
-- [ ] 1.1.5 Initialiseer met `uv init`; voeg `pyproject.toml` toe met `requires-python = ">=3.12"`, project-metadata, console-script entry-point `iso-audit = "iso_audit.cli:main"`
-- [ ] 1.1.6 Voeg dev-dependencies toe via `uv add --dev`: `ruff`, `mypy`, `pytest`, `pytest-cov`, `gitleaks`, `bandit`, `pre-commit`
-- [ ] 1.1.7 Configureer `[tool.ruff]`, `[tool.mypy]`, `[tool.pytest.ini_options]`, `[tool.bandit]` in `pyproject.toml` (mypy --strict op `src/`, coverage tijdelijk 60% gate tot baseline-meting in milestone B)
-- [ ] 1.1.8 Schrijf `.github/workflows/ci.yml` met parallel jobs: `lint` (ruff check), `format` (ruff format --check), `typecheck` (mypy --strict src/), `security` (bandit -r src/), `test` (pytest --cov --cov-fail-under=60)
-- [ ] 1.1.9 Schrijf `.pre-commit-config.yaml` met `ruff check`, `ruff format --check`, `mypy`, `gitleaks`, `bandit`; rationale-comment over `--check` (niet `--write`) toevoegen
-- [ ] 1.1.10 Maak `.github/ISSUE_TEMPLATE/{bug,feature,source-adapter,notifier-adapter}.md`; source- en notifier-adapter-templates forceren protocol-conformance + tests + docs checklists
-- [ ] 1.1.11 Schrijf `.github/pull_request_template.md` met checklist (tests, CHANGELOG, breaking changes, missie-impact)
+- [x] 1.1.1 Maak GitHub-repo `MWest2020/iso-audit` aan (private) — aangemaakt 2026-05-13 via `gh repo create`
+- [ ] 1.1.2 Configureer branch protection op `main`: required PR reviews (≥1), required status checks (alle CI-jobs), no force-push, no direct pushes — *blocked by auto-classifier, wacht op expliciete autorisatie van Mark*
+- [ ] 1.1.3 Configureer required signed commits (GPG of SSH-signing) — *pending: lokale signing-config (GPG/SSH) door Mark; documented in `docs/compensating-control.md` C3*
+- [x] 1.1.4 Indien Enterprise-tier beschikbaar: enable Audit Log; anders maak `compensating-control.md` met beschrijving van alternatieve audit-trail-borging — `docs/compensating-control.md` aangemaakt (persoonlijk account, geen Enterprise)
+- [x] 1.1.5 Initialiseer met `uv init`; voeg `pyproject.toml` toe met `requires-python = ">=3.12"`, project-metadata, console-script entry-point `iso-audit = "iso_audit.cli:main"`
+- [x] 1.1.6 Voeg dev-dependencies toe via `uv add --dev`: `ruff`, `mypy`, `pytest`, `pytest-cov`, `gitleaks`, `bandit`, `pre-commit`
+- [x] 1.1.7 Configureer `[tool.ruff]`, `[tool.mypy]`, `[tool.pytest.ini_options]`, `[tool.bandit]` in `pyproject.toml` (mypy --strict op `src/`, coverage tijdelijk 60% gate tot baseline-meting in milestone B)
+- [x] 1.1.8 Schrijf `.github/workflows/ci.yml` met parallel jobs: `lint` (ruff check), `format` (ruff format --check), `typecheck` (mypy --strict src/), `security` (bandit -r src/), `test` (pytest --cov --cov-fail-under=60)
+- [x] 1.1.9 Schrijf `.pre-commit-config.yaml` met `ruff check`, `ruff format --check`, `mypy`, `gitleaks`, `bandit`; rationale-comment over `--check` (niet `--write`) toevoegen
+- [x] 1.1.10 Maak `.github/ISSUE_TEMPLATE/{bug,feature,source-adapter,notifier-adapter}.md`; source- en notifier-adapter-templates forceren protocol-conformance + tests + docs checklists
+- [x] 1.1.11 Schrijf `.github/pull_request_template.md` met checklist (tests, CHANGELOG, breaking changes, missie-impact)
 
 ### 1.2 Source Protocol (in milestone A definiëren, geen implementaties)
 
-- [ ] 1.2.1 Schrijf `src/iso_audit/__init__.py` (versie-export)
-- [ ] 1.2.2 Schrijf `src/iso_audit/sources/__init__.py` met `SourceRegistry` (`@register` decorator, `available()`, `get(naam)`, ValueError op dubbele registratie)
-- [ ] 1.2.3 Schrijf `src/iso_audit/sources/base.py` met `Source` Protocol (4 methodes), `Document` en `Finding` frozen dataclasses
-- [ ] 1.2.4 Schrijf `tests/conftest.py` met fixture-set (sample-Documents, sample-Findings) gebruikt door alle contract-tests
-- [ ] 1.2.5 Schrijf `tests/sources/test_protocol_contract.py` met parametrized tests die Protocol-invarianten valideren incl. immutability-check; lege adapter-set, draait leeg-groen
+- [x] 1.2.1 Schrijf `src/iso_audit/__init__.py` (versie-export)
+- [x] 1.2.2 Schrijf `src/iso_audit/sources/__init__.py` met `SourceRegistry` (`@register` decorator, `available()`, `get(naam)`, ValueError op dubbele registratie)
+- [x] 1.2.3 Schrijf `src/iso_audit/sources/base.py` met `Source` Protocol (4 methodes), `Document` en `Finding` frozen dataclasses
+- [x] 1.2.4 Schrijf `tests/conftest.py` met fixture-set (sample-Documents, sample-Findings) gebruikt door alle contract-tests
+- [x] 1.2.5 Schrijf `tests/sources/test_protocol_contract.py` met parametrized tests die Protocol-invarianten valideren incl. immutability-check; lege adapter-set, draait leeg-groen
 
 ### 1.3 Sink Protocol (alleen spec, geen implementaties)
 
-- [ ] 1.3.1 Schrijf `src/iso_audit/sinks/__init__.py`
-- [ ] 1.3.2 Schrijf `src/iso_audit/sinks/base.py` met `Sink` Protocol (`send`, `healthcheck`), `SinkPayload`-hierarchy: `ReportPayload`, `NotificationPayload`, `MirrorPayload` (placeholder), `SinkResult` dataclass
-- [ ] 1.3.3 Schrijf `tests/sinks/test_protocol_shape.py` met statische check dat Protocol-en-Payload-classes correct gedefinieerd zijn (geen runtime-tests want geen implementatie)
+- [x] 1.3.1 Schrijf `src/iso_audit/sinks/__init__.py`
+- [x] 1.3.2 Schrijf `src/iso_audit/sinks/base.py` met `Sink` Protocol (`send`, `healthcheck`), `SinkPayload`-hierarchy: `ReportPayload`, `NotificationPayload`, `MirrorPayload` (placeholder), `SinkResult` dataclass
+- [x] 1.3.3 Schrijf `tests/sinks/test_protocol_shape.py` met statische check dat Protocol-en-Payload-classes correct gedefinieerd zijn (geen runtime-tests want geen implementatie)
 
 ### 1.4 Notifier Protocol
 
-- [ ] 1.4.1 Schrijf `src/iso_audit/notifiers/__init__.py` met `NotifierRegistry` (identiek patroon als SourceRegistry)
-- [ ] 1.4.2 Schrijf `src/iso_audit/notifiers/base.py` met `Notifier` Protocol (`vraag_besluit`, `healthcheck`), `DecisionResolver` Protocol (`resolve`)
-- [ ] 1.4.3 Schrijf `tests/notifiers/test_protocol_contract.py` met parametrized tests; lege adapter-set, draait leeg-groen
+- [x] 1.4.1 Schrijf `src/iso_audit/notifiers/__init__.py` met `NotifierRegistry` (identiek patroon als SourceRegistry)
+- [x] 1.4.2 Schrijf `src/iso_audit/notifiers/base.py` met `Notifier` Protocol (`vraag_besluit`, `healthcheck`), `DecisionResolver` Protocol (`resolve`)
+- [x] 1.4.3 Schrijf `tests/notifiers/test_protocol_contract.py` met parametrized tests; lege adapter-set, draait leeg-groen
 
 ### 1.5 Documentatie en missie
 
-- [ ] 1.5.1 Schrijf `docs/missie.md` (verbatim of licht-geredigeerd uit `Tool-ontwerp_audit-tool_2026-05-05.md`); versionering en datum-stempel
-- [ ] 1.5.2 Schrijf `ARCHITECTURE.md` met source/sink/notifier-protocollen + modes-contract overzicht; expliciete link naar `docs/missie.md` en deze design-doc
-- [ ] 1.5.3 Schrijf `iso-audit/CLAUDE.md` per memory-migratieplan: scope, missie-pointer, source/sink/notifier/modes-uitleg, OpenSpec-workflow, boring-auditable-principe, uv-workflow
-- [ ] 1.5.4 Schrijf `README.md` met quick-start (`uv sync`, `iso-audit --help`), links naar ARCHITECTURE.md, docs/missie.md en docs/
-- [ ] 1.5.5 Schrijf `CHANGELOG.md` (Keep a Changelog format) met initial v0.1.0-alpha entry
-- [ ] 1.5.6 Schrijf `docs/sources/{drive,planning,jira,mcp,rest}.md` (laatste twee placeholder met "TODO: implementatie via eigen change-proposal")
-- [ ] 1.5.7 Schrijf `docs/notifiers/{slack,email,teams,mattermost}.md` (laatste twee placeholder)
-- [ ] 1.5.8 Schrijf `docs/modes.md` met sectie "Modi en de missie" (autonoom-runs leveren geen capability-3-data)
-- [ ] 1.5.9 Schrijf `docs/sinks/README.md` als index met "implementaties vanaf milestone C"
+- [x] 1.5.1 Schrijf `docs/missie.md` (verbatim of licht-geredigeerd uit `Tool-ontwerp_audit-tool_2026-05-05.md`); versionering en datum-stempel
+- [x] 1.5.2 Schrijf `ARCHITECTURE.md` met source/sink/notifier-protocollen + modes-contract overzicht; expliciete link naar `docs/missie.md` en deze design-doc
+- [x] 1.5.3 Schrijf `iso-audit/CLAUDE.md` per memory-migratieplan: scope, missie-pointer, source/sink/notifier/modes-uitleg, OpenSpec-workflow, boring-auditable-principe, uv-workflow
+- [x] 1.5.4 Schrijf `README.md` met quick-start (`uv sync`, `iso-audit --help`), links naar ARCHITECTURE.md, docs/missie.md en docs/
+- [x] 1.5.5 Schrijf `CHANGELOG.md` (Keep a Changelog format) met initial v0.1.0-alpha entry
+- [x] 1.5.6 Schrijf `docs/sources/{drive,planning,jira,mcp,rest}.md` (laatste twee placeholder met "TODO: implementatie via eigen change-proposal")
+- [x] 1.5.7 Schrijf `docs/notifiers/{slack,email,teams,mattermost}.md` (laatste twee placeholder)
+- [x] 1.5.8 Schrijf `docs/modes.md` met sectie "Modi en de missie" (autonoom-runs leveren geen capability-3-data)
+- [x] 1.5.9 Schrijf `docs/sinks/README.md` als index met "implementaties vanaf milestone C"
 
 ### 1.6 Acceptatie milestone A
 
-- [ ] 1.6.1 Eerste commit met scaffolding; tag `v0.1.0-alpha`; push naar `main`
-- [ ] 1.6.2 Verifieer: CI groen op alle 5 jobs (lint, format, typecheck, security, test)
-- [ ] 1.6.3 Verifieer: drie contract-tests draaien leeg-groen (sources, notifiers, en sinks-shape)
-- [ ] 1.6.4 Verifieer: branch-protection en signed-commit-vereisten actief in repo-settings (screenshot of API-output bewaren)
-- [ ] 1.6.5 Verifieer: `docs/missie.md` aanwezig en versie-gestempeld
-- [ ] 1.6.6 Acceptatie door Mark: ARCHITECTURE.md gelezen en goedgekeurd
+- [x] 1.6.1 Eerste commit met scaffolding; tag `v0.1.0-alpha`; push naar `main` — gedaan 2026-05-13 (commit `dee5498`, tag via gh API)
+- [x] 1.6.2 Verifieer: CI groen op alle 5 jobs (lint, format, typecheck, security, test) — run 25819303656 success op alle 5
+- [x] 1.6.3 Verifieer: drie contract-tests draaien leeg-groen (sources, notifiers, en sinks-shape)
+- [ ] 1.6.4 Verifieer: branch-protection en signed-commit-vereisten actief in repo-settings (screenshot of API-output bewaren) — *blocked: zie 1.1.2/1.1.3*
+- [x] 1.6.5 Verifieer: `docs/missie.md` aanwezig en versie-gestempeld
+- [x] 1.6.6 Acceptatie door Mark: ARCHITECTURE.md gelezen en goedgekeurd — bevestigd door Mark in sessie 2026-05-13
 
 ## 2. Milestone B — Verhuizing + Source-adapters + Miro + classificatie-traceability (week 3-5)
 
 ### 2.1 Voorbereiding en baseline
 
-- [ ] 2.1.1 Maak `examples/fixture-audit-2026-q1/` met geanonimiseerde sample-CSV (≤20 rijen) + sample-rapport + README
-- [ ] 2.1.2 Schrijf snapshot-tests in `tests/classification/test_findings_snapshot.py` die fixture-CSV door classifier draaien en byte-identiek match vereisen op `parsed_klasse` en `parsed_clausule` (baseline gegenereerd vóór refactor)
-- [ ] 2.1.3 Meet test-coverage baseline op huidig `Ops_to_Biz/audit/`-codebase (kopie naar tijdelijke iso-audit-branch); bepaal definitieve gate `max(baseline + 5%, 70%)`, plafond 85%
-- [ ] 2.1.4 Update CI-config: `--cov-fail-under=<gate>` met definitieve waarde
+- [ ] 2.1.1 Maak `examples/fixture-audit-2026-q1/` met geanonimiseerde sample-CSV (≤20 rijen) + sample-rapport + README — *deels: skeleton + README done in PR #1 (2026-05-13); data-vulling volgt in `feat/milestone-b-fixture-data`*
+- [ ] 2.1.2 Schrijf snapshot-tests in `tests/classification/test_findings_snapshot.py` die fixture-CSV door classifier draaien en byte-identiek match vereisen op `parsed_klasse` en `parsed_clausule` (baseline gegenereerd vóór refactor) — *pending op 2.1.1 data-vulling*
+- [x] 2.1.3 Meet test-coverage baseline op huidig `Ops_to_Biz/audit/`-codebase (kopie naar tijdelijke iso-audit-branch); bepaal definitieve gate `max(baseline + 5%, 70%)`, plafond 85% — baseline = 0% (geen tests in `Ops_to_Biz/audit/`); gate = 70%
+- [x] 2.1.4 Update CI-config: `--cov-fail-under=<gate>` met definitieve waarde — 60 → 70 in `.github/workflows/ci.yml` (PR #1)
 
 ### 2.2 Module-migratie (kern, niet-source-specifiek)
 
