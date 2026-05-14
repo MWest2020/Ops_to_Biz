@@ -5,6 +5,18 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.3 source-adapters (gws + Drive + Planning)
+
+Drie trunk-commits op `refactor/iso-audit-milestone-b`:
+
+- **§2.3.1** `clients/gws.py` — verhuisd uit `audit/gws_client.py`; type-hints, bandit-nosec, retry-paden gemockt in 15 tests.
+- **§2.3.2-2.3.4** `sources/drive.py` — `DriveSource` adapter implementeert het `Source`-protocol; `@register` decorator zorgt voor auto-discovery; legacy `haal_documenten_op` blijft voor backwards-compat; 29 tests. Protocol-contract-tests voor `drive` nu groen. `conftest.lege_registries` re-importeert bundled adapters bij teardown.
+- **§2.3.5-2.3.7** `sources/planning.py` — `PlanningSource` adapter, parsing van auditplanning-tabs (jaar × norm × maand-kolommen); `gws_lees_sheet`/`gws_lees_alle_tabs` toegevoegd aan `clients/gws`; service-account-modus uit `gsa_client.py` geschrapt (consistent met DriveSource via `gws auth login`); 33 tests.
+
+Cumulatief op refactor-branch: **430 tests passed**, alle quality gates groen.
+
+**Nog open in §2.3**: `verify_docs.py` migratie (§2.3.8) — gebruikt nu `gsa_client.py` Sheets-functies; switchen naar `clients/gws.py` is een kleine vervolgcommit.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.2.5 finding_classification consolidatie
 
 Eén commit op `refactor/iso-audit-milestone-b`:

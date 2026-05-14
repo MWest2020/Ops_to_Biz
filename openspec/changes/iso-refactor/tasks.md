@@ -77,13 +77,13 @@
 
 ### 2.3 Source-adapters (eerlijke decompositie)
 
-- [ ] 2.3.1 Splits Google-Workspace-client uit `audit/gws_client.py` → `src/iso_audit/clients/gws.py` (interne client-module, niet Source/Sink); shared `_gws()`-helper blijft hier
-- [ ] 2.3.2 Migreer `audit/drive_ingest.py` → `src/iso_audit/sources/drive.py` als `DriveSource` (alleen read-pad); class implementeert `Source` Protocol met `naam = "drive"`; gebruikt `clients/gws.py`
-- [ ] 2.3.3 Registreer `DriveSource` via `@register` decorator op module-level
-- [ ] 2.3.4 Schrijf `tests/sources/test_drive.py` met DriveSource-specifieke tests; verifieer dat `tests/sources/test_protocol_contract.py` nu groene parametrized-tests heeft voor `drive`
-- [ ] 2.3.5 Migreer `audit/planning_ingest.py` + `audit/gsa_client.py` → `src/iso_audit/sources/planning.py` als `PlanningSource` (Google Sheets); class implementeert `Source` Protocol met `naam = "planning"`; gebruikt `clients/gws.py` voor Sheets-API
-- [ ] 2.3.6 Registreer `PlanningSource` via `@register` decorator
-- [ ] 2.3.7 Schrijf `tests/sources/test_planning.py`; verifieer contract-tests groen voor `planning`
+- [x] 2.3.1 Splits Google-Workspace-client uit `audit/gws_client.py` → `src/iso_audit/clients/gws.py` (interne client-module, niet Source/Sink); shared `_gws()`-helper blijft hier — 15 tests; retry-paden gemockt; bandit-nosec op subprocess
+- [x] 2.3.2 Migreer `audit/drive_ingest.py` → `src/iso_audit/sources/drive.py` als `DriveSource` (alleen read-pad); class implementeert `Source` Protocol met `naam = "drive"`; gebruikt `clients/gws.py` — 29 tests; legacy `haal_documenten_op` blijft voor backwards-compat
+- [x] 2.3.3 Registreer `DriveSource` via `@register` decorator op module-level
+- [x] 2.3.4 Schrijf `tests/sources/test_drive.py` met DriveSource-specifieke tests; verifieer dat `tests/sources/test_protocol_contract.py` nu groene parametrized-tests heeft voor `drive` — `test_registry_is_empty_in_milestone_a` vervangen door `test_registry_bevat_minstens_drive`; conftest `lege_registries` re-importeert bundled adapters na teardown
+- [x] 2.3.5 Migreer `audit/planning_ingest.py` + `audit/gsa_client.py` → `src/iso_audit/sources/planning.py` als `PlanningSource` (Google Sheets); class implementeert `Source` Protocol met `naam = "planning"`; gebruikt `clients/gws.py` voor Sheets-API — 33 tests; `gws_lees_sheet`/`gws_lees_alle_tabs` toegevoegd aan `clients/gws`; SA-modus uit `gsa_client` geschrapt (alle auth via `gws auth login`)
+- [x] 2.3.6 Registreer `PlanningSource` via `@register` decorator
+- [x] 2.3.7 Schrijf `tests/sources/test_planning.py`; verifieer contract-tests groen voor `planning`
 - [ ] 2.3.8 Update `audit/verify_docs.py` (gebruikt nu `gsa_client.py`) → `src/iso_audit/verify_docs.py`; pas imports aan naar `clients/gws.py`
 
 ### 2.4 Miro-consolidatie
