@@ -5,6 +5,12 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.5.10 pipeline orchestrator
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.5.10** `pipeline.py` — top-level orchestrator gemigreerd; imports vernieuwd naar `iso_audit.*`; HTML/DOCX/PDF-keten als private helper; `main(argv)` voor testbaarheid; specifieke `OSError`-vangst voor Miro; bandit nosec voor `gws auth status`-subprocess; 21 tests, 79% overall cov. Cumulatief: 553 tests passed.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.5.8 + §2.5.9 (interview + ingest)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:

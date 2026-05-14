@@ -107,7 +107,7 @@
 - [x] 2.5.7 Migreer `audit/sheets_gws.py` → `src/iso_audit/reporting/sheets_gws.py` (verwijder de "Consistent met argocd_sync"-comment, want de twee repo's zijn nu losgekoppeld) — 24 tests; bandit-nosec op gws CLI; comment verwijderd
 - [x] 2.5.8 Migreer `audit/interview.py` → `src/iso_audit/interview.py` — 13 tests; ANSI-helpers, `_vraag_bevinding` met EOF/quit-handling, gap-detectie via `clause_matches`; 68% per-file coverage
 - [x] 2.5.9 Migreer `audit/ingest.py` → `src/iso_audit/ingest.py`; refactor om SourceRegistry te gebruiken in plaats van directe imports — `beschikbare_bronnen()` combineert `sources.available()` met pseudo-bron `miro` (zolang er geen `MiroSource`-adapter is); 13 tests, 95% cov
-- [ ] 2.5.10 Migreer `audit/pipeline.py` → `src/iso_audit/pipeline.py`; refactor om SourceRegistry-gebaseerde `--source` flag te ondersteunen
+- [x] 2.5.10 Migreer `audit/pipeline.py` → `src/iso_audit/pipeline.py` — imports vernieuwd, HTML/DOCX/PDF als private helper, type-hints, `main(argv)` voor testbaarheid, specifieke `OSError`-vangst, bandit nosec voor `gws auth status`; 21 tests, 79% overall cov (run_audit/run_report_only-bodies niet integraal getest)
 - [ ] 2.5.11 Migreer `audit/assets/` → `src/iso_audit/assets/` (logo-SVG's)
 - [ ] 2.5.12 Migreer `audit/config/` → `src/iso_audit/config/` (clause-maps, normteksten-yaml)
 
