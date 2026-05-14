@@ -5,6 +5,18 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.5.1 rest (tabular_report + slide_summary + report_generation)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.5.1** `reporting/tabular_report.py` (21 tests, 87% cov) — CSV/Excel-export met thema-grouping; gebruikt `iso_audit.classification.thema` als bron-of-truth (geen duplicatie); `openpyxl` toegevoegd als runtime-dep.
+- **§2.5.1** `reporting/slide_summary.py` (8 tests, 98% cov) — Google Slides 5-slide executive summary via `clients/gws._gws`.
+- **§2.5.1** `reporting/report_generation.py` (18 tests, 84% cov) — Google Docs template-fill; `_oordeel_zin`/`_oordeel_instructie`-helpers met strikt sjabloon (voorkomt LLM-hedging); management-summary via Anthropic met optionele basis-document fallback (`AUDIT_BASIS_SUMMARY`).
+- **verify_docs.py** — bandit `nosec B608` markers op de twee `DELETE … WHERE id IN ({placeholders})` queries (placeholders zijn `?,?,…` zonder user input).
+- **Mypy override** — `openpyxl.*` toegevoegd aan `ignore_missing_imports`.
+
+Cumulatief op refactor-branch: **501 tests passed**, alle quality gates groen.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.3 source-adapters (gws + Drive + Planning)
 
 Drie trunk-commits op `refactor/iso-audit-milestone-b`:
