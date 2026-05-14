@@ -5,6 +5,19 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Status — 2026-05-14 — iso-refactor session-end (106 done, 40 open)
+
+Milestone C is voor het code-deel grotendeels af op `MWest2020/iso-audit
+refactor/iso-audit-milestone-b`. Tests: **672 passed**, 81% overall cov.
+Wat resteert vereist externe credentials of Mark's expliciete actie:
+
+- **§3.6 (manuele acceptatie)** — integer-runs met echte Slack/Email/Jira/Drive credentials.
+- **§3.7 (destructief)** — `Ops_to_Biz/audit/`-verwijdering wacht op §3.6 acceptatie.
+- **§3.8 (release)** — `v1.0.0` tag + audit-overzicht na §3.6/§3.7.
+- **Deferred binnen §3.2-§3.4** — Slack Events handler + Flask portaal + write-consolidatie via DriveSink + docs. Zijn opgeschort tot na eerste integer-run om rich-content-pad eerst te bevestigen.
+- **§1.1.2-3** — branch protection + signed commits wachten op Mark's GitHub-config.
+- **§4.x** — post-milestone follow-ups, expliciet eigen change-proposals.
+
 ### Changed — 2026-05-14 — iso-refactor: §3.3 + §3.4 (DriveSink + JiraSource)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:

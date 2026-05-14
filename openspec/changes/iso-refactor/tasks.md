@@ -189,23 +189,23 @@
 
 ### 3.6 Eerste integer-run-validatie
 
-- [ ] 3.6.1 Eerste integer-run-target: `iso-audit pipeline --norm 27001 --source jira --source drive --mode integer --notifier slack`
-- [ ] 3.6.2 Tweede smoke-test: `iso-audit pipeline --norm 27001 --source drive --mode integer --notifier email`
-- [ ] 3.6.3 Verifieer: alle drie hoog-risico beslispunten zichtbaar in handoffs (Slack-message én Email-magic-link)
-- [ ] 3.6.4 Verifieer: auditor-besluiten persistent in `decisions`-tabel met `notifier_naam` correct gevuld (`"slack"` of `"email"`)
-- [ ] 3.6.5 Verifieer: crash-recovery werkt — kill pipeline tijdens pending-state, herstart, geen dubbele Notifier-call
+- [ ] 3.6.1 Eerste integer-run-target: `iso-audit pipeline --norm 27001 --source jira --source drive --mode integer --notifier slack` — *handmatige acceptatietest: vereist echte Slack-app + Jira-token + Drive-folder; uit te voeren door Mark*
+- [ ] 3.6.2 Tweede smoke-test: `iso-audit pipeline --norm 27001 --source drive --mode integer --notifier email` — *handmatige acceptatietest: vereist SMTP-relay + Flask-portaal (§3.2.6 eerst); uit te voeren door Mark*
+- [ ] 3.6.3 Verifieer: alle drie hoog-risico beslispunten zichtbaar in handoffs — *blocked door §3.1.7-volledig + §3.6.1*
+- [ ] 3.6.4 Verifieer: auditor-besluiten persistent in `decisions`-tabel met `notifier_naam` correct gevuld — *blocked door §3.6.1*
+- [ ] 3.6.5 Verifieer: crash-recovery werkt — *blocked door §3.6.1 + audit_id-persistentie*
 
 ### 3.7 Cleanup en migratie-afsluiting
 
-- [ ] 3.7.1 Verwijder `Ops_to_Biz/audit/` volledig
-- [ ] 3.7.2 Verwijder `Ops_to_Biz/audit/archive/` volledig
-- [ ] 3.7.3 Ruim `Ops_to_Biz/CLAUDE.md` op: verwijder audit-sectie volledig (behoud alleen historische CHANGELOG-pointer)
-- [ ] 3.7.4 Update gedeelde Claude-memory: paden van `audit/` naar `iso-audit/`
+- [ ] 3.7.1 Verwijder `Ops_to_Biz/audit/` volledig — *destructief; uit te voeren door Mark na §3.6 acceptatie*
+- [ ] 3.7.2 Verwijder `Ops_to_Biz/audit/archive/` volledig — *idem*
+- [ ] 3.7.3 Ruim `Ops_to_Biz/CLAUDE.md` op: verwijder audit-sectie volledig (behoud alleen historische CHANGELOG-pointer) — *als §3.7.1 is gedaan; deprecation-notitie al toegevoegd in M-B §2.8.1*
+- [ ] 3.7.4 Update gedeelde Claude-memory: paden van `audit/` naar `iso-audit/` — *al gestart via project_iso_audit_refactor.md memory*
 
 ### 3.8 Acceptatie milestone C
 
-- [ ] 3.8.1 Tag `v1.0.0` op iso-audit
-- [ ] 3.8.2 End-to-end smoke-tests groen op zowel Slack- als Email-notifier
+- [ ] 3.8.1 Tag `v1.0.0` op iso-audit — *na §3.6 acceptatie + §3.7.1*
+- [ ] 3.8.2 End-to-end smoke-tests groen op zowel Slack- als Email-notifier — *idem §3.6.1+2*
 - [ ] 3.8.3 Externe-audit-overzicht aanleveren: drie milestone-tags + commit-ranges + acceptatiecriteria
 - [ ] 3.8.4 Acceptatie door Mark: eerste integer-run draaibaar in beide notifier-configuraties
 
