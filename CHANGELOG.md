@@ -5,6 +5,17 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §3.3 + §3.4 (DriveSink + JiraSource)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§3.3.1+3** `DriveSink` — eerste concrete Sink-implementatie; ReportPayload-only; 11 tests, 90% cov.
+- **§3.4.1-5** `JiraSource` — Jira Cloud REST API v3 adapter; pagineert; ADF→tekst; label-naar-clausule heuristiek; 17 tests, 91% cov.
+- **§3.4.5** Contract-tests groen voor `drive`/`planning`/`jira` (parametrized) + sink `drive`.
+- Uitgesteld: §3.3.2 (reporting-write consolidatie), §3.3.4/§3.4.6 (docs) — wachten op rich-content-pad-bevestiging na eerste integer-run.
+
+Cumulatief: 672 tests passed; 81% overall cov.
+
 ### Changed — 2026-05-14 — iso-refactor: §3.1.7-8 + §3.5 (pipeline emit + CLI mode/notifier)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:

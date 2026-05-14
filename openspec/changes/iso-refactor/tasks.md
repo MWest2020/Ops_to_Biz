@@ -166,19 +166,19 @@
 
 ### 3.3 Sink-implementatie (DriveSink)
 
-- [ ] 3.3.1 Schrijf `src/iso_audit/sinks/drive.py` met `DriveSink` die `Sink` Protocol implementeert (`naam = "drive"`)
-- [ ] 3.3.2 Consolideer rapport-write-paden uit `src/iso_audit/reporting/` om via `DriveSink.send(ReportPayload)` te lopen
-- [ ] 3.3.3 Schrijf `tests/sinks/test_drive.py` met scenario's voor ReportPayload + NotificationPayload
-- [ ] 3.3.4 Schrijf `docs/sinks/drive.md`
+- [x] 3.3.1 Schrijf `src/iso_audit/sinks/drive.py` met `DriveSink` die `Sink` Protocol implementeert (`naam = "drive"`) — accepteert ReportPayload, weigert andere; upload via `clients/gws._gws`; minimale HTML→tekst conversie
+- [ ] 3.3.2 Consolideer rapport-write-paden uit `src/iso_audit/reporting/` om via `DriveSink.send(ReportPayload)` te lopen — *DEFERRED: wacht op rich-content-pad-bevestiging na eerste integer-run*
+- [x] 3.3.3 Schrijf `tests/sinks/test_drive.py` met scenario's voor ReportPayload + NotificationPayload — 11 tests, 90% cov; payload-type narrowing, gws-error, healthcheck-paden
+- [ ] 3.3.4 Schrijf `docs/sinks/drive.md` — *DEFERRED, samen met §3.3.2*
 
 ### 3.4 Jira-source-adapter
 
-- [ ] 3.4.1 Schrijf `src/iso_audit/sources/jira.py` met `JiraSource` (`naam = "jira"`); Jira Cloud REST API v3, token-auth via env-vars
-- [ ] 3.4.2 Implementeer `list_documents` (issue-metadata) en `list_findings` (issues als bevindingen) met JQL-config
-- [ ] 3.4.3 Registreer `JiraSource` via `@register`
-- [ ] 3.4.4 Schrijf `tests/sources/test_jira.py` met gemockte Jira-API
-- [ ] 3.4.5 Verifieer contract-tests groen voor `jira`
-- [ ] 3.4.6 Schrijf `docs/sources/jira.md` met setup-instructies
+- [x] 3.4.1 Schrijf `src/iso_audit/sources/jira.py` met `JiraSource` (`naam = "jira"`); Jira Cloud REST API v3, token-auth via env-vars — `JIRA_BASE_URL` + `JIRA_EMAIL` + `JIRA_API_TOKEN`; basic-auth
+- [x] 3.4.2 Implementeer `list_documents` (issue-metadata) en `list_findings` (issues als bevindingen) met JQL-config — pagineert via `startAt`; ADF→tekst conversie; label-naar-clausule heuristiek (`iso27001-5.30` → `5.30`)
+- [x] 3.4.3 Registreer `JiraSource` via `@register`
+- [x] 3.4.4 Schrijf `tests/sources/test_jira.py` met gemockte Jira-API — 17 tests, 91% cov
+- [x] 3.4.5 Verifieer contract-tests groen voor `jira` — parametrized `tests/sources/test_protocol_contract.py` draait nu over `drive` + `planning` + `jira`; tests/conftest re-importeert alle bundled adapters
+- [ ] 3.4.6 Schrijf `docs/sources/jira.md` met setup-instructies — *DEFERRED, samen met M-C-acceptatie docs*
 
 ### 3.5 CLI-uitbreiding
 
