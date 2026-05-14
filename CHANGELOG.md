@@ -5,6 +5,14 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.2.5 finding_classification consolidatie
+
+Eén commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.2.5** `classification/findings.py` — consolidatie van v1 (`finding_classification.py`) + v2 (`finding_classification_20260420.py`). v2 als basis (caching, `Kostenteller`, rehash, dry-run-cost, mis-tag-filter, sharpness-prompts). `review_en_bevestig` uit v1 inline. Legacy `sla_op_in_sheets`-wrapper geschrapt (callers gaan rechtstreeks naar `iso_audit.reporting.sheets_gws`). 43 tests; lazy imports voor `store` / `clause_mapping` / `data.normteksten`; Drive-CLI valt via `importlib` graceful terug als §2.3.2 nog niet beschikbaar is.
+
+Cumulatief op refactor-branch: **349 tests passed**, alle quality gates groen.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.5 reporting batch (vier modules)
 
 Vier trunk-commits op `refactor/iso-audit-milestone-b`:
