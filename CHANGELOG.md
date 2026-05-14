@@ -5,6 +5,20 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — Milestone B van iso-refactor: +2 PRs op iso-audit (totaal 8)
+
+Vervolg-PRs op de iso-refactor (zie eerdere entries voor PR #1-#6):
+
+- **PR #7** `feat/milestone-b-miro-client` — `src/iso_audit/miro/` package met `client.py` (§2.4.1 + §2.4.2 + §2.4.6). `MiroClient` typed wrapper rond `requests`: stateless token-fetch, één-retry-bij-429 + Retry-After, vriendelijke throttle, `paginated_get` generator. `MiroError`/`MiroRateLimitError`. `droog`-mode voor POST. 21 tests, coverage 97% op module.
+- **PR #8** `feat/milestone-b-reporting-converters` — `src/iso_audit/reporting/{md_to_html,html_to_docx,html_to_pdf}.py` (§2.5.2). Drie format-converters, geen internal-iso_audit cross-deps. Path-based padresolutie, type-hints over alle signatures, bandit `# nosec` op Chrome-subprocess. 16 tests. Runtime-deps: `markdown`, `python-docx`, `htmldocx`. Mypy-override voor `htmldocx`.
+
+**Blocked op upstream-merges** (zelfde wall als gisteren):
+- §2.4.3/§2.4.5 Miro board_setup + interview (lazy-importeren clause_mapping + normteksten)
+- §2.4.4 Miro ingest (standalone — kan na PR #7 merge)
+- §2.5.1 tabular_report/local_report/report_generation (deps op normteksten + thema)
+- §2.5.4/§2.5.5 full_report + landscape (lazy-importeren store + clause_mapping)
+- §2.5.3/§2.5.6/§2.5.7 template_setup/make_pptx/sheets_gws — laatste drie zijn standalone qua iso_audit-deps maar het PR-tempo is afhankelijk van merge-pace.
+
 ### Changed — 2026-05-13 — Milestone B van iso-refactor: +2 PRs op iso-audit (totaal 6)
 
 Vervolg-PRs op de iso-refactor (zie eerdere entry voor PR #1-#4):

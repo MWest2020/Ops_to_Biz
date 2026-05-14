@@ -88,18 +88,18 @@
 
 ### 2.4 Miro-consolidatie
 
-- [ ] 2.4.1 Maak `src/iso_audit/miro/` package met `__init__.py`
-- [ ] 2.4.2 Schrijf `src/iso_audit/miro/client.py` met gedeelde HTTP-laag: `_headers()`, `_post()`, `_get()`, rate-limit handling, retry-logica
-- [ ] 2.4.3 Migreer `audit/miro_board_setup.py` → `src/iso_audit/miro/board_setup.py`; gebruikt `client.py` (geen eigen `_headers`/`_post`)
-- [ ] 2.4.4 Migreer `audit/miro_ingest.py` → `src/iso_audit/miro/ingest.py`; gebruikt `client.py`
-- [ ] 2.4.5 Migreer `audit/interview_miro.py` → `src/iso_audit/miro/interview.py`; gebruikt `client.py`
-- [ ] 2.4.6 Schrijf `tests/miro/test_client.py` met rate-limit + retry-edge-cases
-- [ ] 2.4.7 Visuele snapshot-test op één Miro-test-bord: JSON-export voor refactor → na refactor identiek
+- [x] 2.4.1 Maak `src/iso_audit/miro/` package met `__init__.py` — PR #7
+- [x] 2.4.2 Schrijf `src/iso_audit/miro/client.py` met gedeelde HTTP-laag: `_headers()`, `_post()`, `_get()`, rate-limit handling, retry-logica — PR #7: `MiroClient` met typed `MiroError`/`MiroRateLimitError`, configurable timeout + throttle, `paginated_get` generator. requests + types-requests deps.
+- [ ] 2.4.3 Migreer `audit/miro_board_setup.py` → `src/iso_audit/miro/board_setup.py`; gebruikt `client.py` (geen eigen `_headers`/`_post`) — *BLOCKED: lazy-importeert `clause_mapping` + `normteksten` uit PR #3/#4*
+- [ ] 2.4.4 Migreer `audit/miro_ingest.py` → `src/iso_audit/miro/ingest.py`; gebruikt `client.py` — *standalone, kan na PR #7 merge*
+- [ ] 2.4.5 Migreer `audit/interview_miro.py` → `src/iso_audit/miro/interview.py`; gebruikt `client.py` — *BLOCKED: lazy-importeert `clause_mapping` + `normteksten`*
+- [x] 2.4.6 Schrijf `tests/miro/test_client.py` met rate-limit + retry-edge-cases — PR #7: 21 cases (rate-limit/retry, pagination, 5xx, timeout, throttle, droog-mode)
+- [ ] 2.4.7 Visuele snapshot-test op één Miro-test-bord: JSON-export voor refactor → na refactor identiek — *pending op echte board-toegang*
 
 ### 2.5 Reporting-modules (interne migratie, géén Sink-implementatie)
 
 - [ ] 2.5.1 Migreer `audit/local_report.py` + `tabular_report.py` + `report_generation.py` + `slide_summary.py` → `src/iso_audit/reporting/`; nog géén Sink-stempel — DriveSink komt in milestone C
-- [ ] 2.5.2 Migreer `audit/md_to_html.py` + `html_to_docx.py` + `html_to_pdf.py` → `src/iso_audit/reporting/`
+- [x] 2.5.2 Migreer `audit/md_to_html.py` + `html_to_docx.py` + `html_to_pdf.py` → `src/iso_audit/reporting/` — PR #8: 16 tests, markdown + python-docx + htmldocx runtime-deps, Path-based padresolutie, bandit nosec voor Chrome subprocess
 - [ ] 2.5.3 Migreer `audit/template_setup.py` → `src/iso_audit/reporting/template_setup.py`
 - [ ] 2.5.4 Migreer `audit/full_report.py` → `src/iso_audit/reporting/full_report.py`
 - [ ] 2.5.5 Migreer `audit/landscape.py` → `src/iso_audit/reporting/landscape.py`
