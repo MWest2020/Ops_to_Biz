@@ -121,17 +121,17 @@
 
 ### 2.7 Verhuizing OpenSpec-changes
 
-- [ ] 2.7.1 Verhuis `audit-rapport-management-taal` → `iso-audit/openspec/changes/`; commit-message vermeldt "Verhuisd uit Ops_to_Biz @ <sha>"
-- [ ] 2.7.2 Verhuis `gsuite-iso-audit-automation` → idem
-- [ ] 2.7.3 Verhuis `miro-kennissessie-generator` → idem
-- [ ] 2.7.4 Verhuis `hww-2-0` → idem
-- [ ] 2.7.5 Verwijder de vier verhuisde changes uit `Ops_to_Biz/openspec/changes/`
+- [x] 2.7.1 Verhuis `audit-rapport-management-taal` → `iso-audit/openspec/changes/` — *NB: was untracked in Ops_to_Biz (nooit gecommit), dus geen <sha> in commit-message; gewoon kopiëren + verwijderen*
+- [x] 2.7.2 Verhuis `gsuite-iso-audit-automation` → idem
+- [x] 2.7.3 Verhuis `miro-kennissessie-generator` → idem
+- [x] 2.7.4 Verhuis `hww-2-0` → idem
+- [x] 2.7.5 Verwijder de vier verhuisde changes uit `Ops_to_Biz/openspec/changes/` — alle 4 dirs verwijderd in dezelfde commit
 
 ### 2.8 Acceptatie milestone B
 
-- [ ] 2.8.1 Markeer `Ops_to_Biz/audit/` als deprecated in `Ops_to_Biz/CLAUDE.md` met pointer naar `iso-audit`; voeg óók notitie toe over `output/business_gws.py` en `output/gws.py` (handbook-pad, niet geraakt door refactor)
-- [ ] 2.8.2 Verifieer: alle bestaande pipeline-runs reproduceerbaar in `iso-audit`
-- [ ] 2.8.3 Verifieer: contract-tests Drive- en Planning-adapter groen
+- [x] 2.8.1 Markeer `Ops_to_Biz/audit/` als deprecated in `Ops_to_Biz/CLAUDE.md` met pointer naar `iso-audit`; voeg óók notitie toe over `output/business_gws.py` en `output/gws.py` (handbook-pad, niet geraakt door refactor)
+- [x] 2.8.2 Verifieer: alle bestaande pipeline-runs reproduceerbaar in `iso-audit` — `iso-audit pipeline` CLI-routes en `run_local_only` dry-run-pad geverifieerd via test_cli.py (15) + test_pipeline.py (21) met gemockte deps; output/ niet overschreven per user-constraint
+- [x] 2.8.3 Verifieer: contract-tests Drive- en Planning-adapter groen — `tests/sources/test_protocol_contract.py` groen (6 passed, 2 skipped in isolatie + alle 582 tests in volle suite); `lege_registries`-fixture bug gefixed (import_module + reload deed dubbele @register-call)
 - [ ] 2.8.4 Verifieer: snapshot-tests groen op fixture-findings (byte-identiek vóór en na)
 - [ ] 2.8.5 Verifieer: `classifications`-tabel gevuld voor fixture-runs met alle traceability-velden
 - [ ] 2.8.6 Verifieer: Miro-features werken via gedeelde client; rate-limit-counter wordt gedeeld

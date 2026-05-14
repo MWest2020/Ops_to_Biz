@@ -5,6 +5,19 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.7 + §2.8 (M-B acceptatie + verhuizing)
+
+Twee commits sluiten milestone B af:
+
+- **§2.7** Vier openspec change-dirs verhuisd naar `MWest2020/iso-audit` (waren hier untracked):
+  - `audit-rapport-management-taal/`
+  - `gsuite-iso-audit-automation/`
+  - `miro-kennissessie-generator/`
+  - `hww-2-0/`
+- **§2.8.1** `CLAUDE.md` aangepast: `audit/` als DEPRECATED gemarkeerd met pointer naar `iso-audit`-repo; running-section verwijst naar `uv run iso-audit pipeline`. Noot toegevoegd dat `output/business_gws.py`/`output/gws.py` (handbook-pad) niet zijn geraakt.
+- **§2.8.2** Pipeline-reproduceerbaarheid verifieerd via gemockte tests in `test_cli.py` + `test_pipeline.py`; geen integratie-run om bestaande `output/`-artefacten niet te overschrijven.
+- **§2.8.3** Contract-tests Drive + Planning groen.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.6.3-5 (classifications traceability)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:

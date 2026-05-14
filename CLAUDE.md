@@ -2,14 +2,25 @@
 
 ## What this repo is
 
-Two independent Python subsystems in one repo:
+Eén actief Python subsysteem in deze repo:
 
 | Subsystem | Path | Purpose |
 |---|---|---|
 | ArgoCD → Sheets sync | `argocd_sync/` | Daily sync of ArgoCD app data to Google Sheets or .xlsx |
-| ISO Audit pipeline | `audit/` | Automated ISO 9001/27001 audit pipeline using GSuite + Miro |
 
 All argocd-sync code lives under `argocd_sync/`.
+
+### Verhuisd: ISO Audit pipeline
+
+> **`audit/` is DEPRECATED** (per milestone B van `openspec/changes/iso-refactor/`,
+> afgerond 2026-05-14). De actuele code leeft in
+> [`MWest2020/iso-audit`](https://github.com/MWest2020/iso-audit) onder
+> de `refactor/iso-audit-milestone-b`-branch. Gebruik die repo voor alle
+> nieuwe werk; deze `audit/`-directory wordt niet meer bijgewerkt.
+
+> **Niet geraakt door de refactor:** `output/business_gws.py` en
+> `output/gws.py` blijven hier — die zijn onderdeel van het
+> handbook/output-pad, niet van de audit-pipeline.
 
 ---
 
@@ -24,10 +35,15 @@ export OUTPUT_MODE=local   # or gws
 
 ### ISO Audit pipeline
 
+Verhuisd naar [`MWest2020/iso-audit`](https://github.com/MWest2020/iso-audit).
+Gebruik dat project:
+
 ```bash
-pip install -r requirements.txt
-python -m audit.pipeline --norm 9001     # or 27001 / beide
-python -m audit.pipeline --setup-template  # first-time only
+# In iso-audit repo:
+uv sync
+uv run iso-audit pipeline --source drive --norm 9001
+uv run iso-audit setup-template  # first-time only
+uv run iso-audit doctor          # environment check
 ```
 
 ---
