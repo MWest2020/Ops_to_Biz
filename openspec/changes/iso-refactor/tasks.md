@@ -98,13 +98,13 @@
 
 ### 2.5 Reporting-modules (interne migratie, géén Sink-implementatie)
 
-- [ ] 2.5.1 Migreer `audit/local_report.py` + `tabular_report.py` + `report_generation.py` + `slide_summary.py` → `src/iso_audit/reporting/`; nog géén Sink-stempel — DriveSink komt in milestone C
+- [ ] 2.5.1 Migreer `audit/local_report.py` + `tabular_report.py` + `report_generation.py` + `slide_summary.py` → `src/iso_audit/reporting/`; nog géén Sink-stempel — DriveSink komt in milestone C — **DEELS**: `local_report.py` gemigreerd (20 tests); `tabular_report.py`/`report_generation.py`/`slide_summary.py` pending (laatste twee importeren gws_client uit §2.3.1)
 - [x] 2.5.2 Migreer `audit/md_to_html.py` + `html_to_docx.py` + `html_to_pdf.py` → `src/iso_audit/reporting/` — PR #8: 16 tests, markdown + python-docx + htmldocx runtime-deps, Path-based padresolutie, bandit nosec voor Chrome subprocess
-- [ ] 2.5.3 Migreer `audit/template_setup.py` → `src/iso_audit/reporting/template_setup.py`
-- [ ] 2.5.4 Migreer `audit/full_report.py` → `src/iso_audit/reporting/full_report.py`
-- [ ] 2.5.5 Migreer `audit/landscape.py` → `src/iso_audit/reporting/landscape.py`
+- [ ] 2.5.3 Migreer `audit/template_setup.py` → `src/iso_audit/reporting/template_setup.py` — *BLOCKED: imports `audit.gws_client` (§2.3.1 pending)*
+- [x] 2.5.4 Migreer `audit/full_report.py` → `src/iso_audit/reporting/full_report.py` — 15 tests; scope+planning fallback bij schema-gap; lazy imports naar normteksten + store + clause_mapping
+- [x] 2.5.5 Migreer `audit/landscape.py` → `src/iso_audit/reporting/landscape.py` — 11 tests; scope-fallback met OperationalError-catch; FTS5-zoek via store.zoek
 - [ ] 2.5.6 Migreer `audit/make_pptx.py` → `src/iso_audit/reporting/pptx.py`
-- [ ] 2.5.7 Migreer `audit/sheets_gws.py` → `src/iso_audit/reporting/sheets_gws.py` (verwijder de "Consistent met argocd_sync"-comment, want de twee repo's zijn nu losgekoppeld)
+- [x] 2.5.7 Migreer `audit/sheets_gws.py` → `src/iso_audit/reporting/sheets_gws.py` (verwijder de "Consistent met argocd_sync"-comment, want de twee repo's zijn nu losgekoppeld) — 24 tests; bandit-nosec op gws CLI; comment verwijderd
 - [ ] 2.5.8 Migreer `audit/interview.py` → `src/iso_audit/interview.py`
 - [ ] 2.5.9 Migreer `audit/ingest.py` → `src/iso_audit/ingest.py`; refactor om SourceRegistry te gebruiken in plaats van directe imports
 - [ ] 2.5.10 Migreer `audit/pipeline.py` → `src/iso_audit/pipeline.py`; refactor om SourceRegistry-gebaseerde `--source` flag te ondersteunen

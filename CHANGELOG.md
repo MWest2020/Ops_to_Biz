@@ -5,6 +5,17 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.5 reporting batch (vier modules)
+
+Vier trunk-commits op `refactor/iso-audit-milestone-b`:
+
+- **§2.5.7** `reporting/sheets_gws.py` — `gws` CLI gemockt; bandit-nosec op subprocess; "Consistent met argocd_sync"-comment verwijderd. 24 tests.
+- **§2.5.5** `reporting/landscape.py` — clausule-dekking + interview-grouping + FTS5-zoek; `documents.scope`-kolom-fallback via `OperationalError`-catch. 11 tests.
+- **§2.5.4** `reporting/full_report.py` — volledig rapport met normtekst + bewijs + interview + planning; scope + audit_planning beide gracefully gemist als schema-extensies. 15 tests.
+- **§2.5.1 (deels)** `reporting/local_report.py` — markdown-rapport met §1-§8 secties + aanbevelingen-tabel; `_THEMA_AANBEVELING` constante; thema-grouping via gemigreerde `iso_audit.classification.thema.bepaal_thema`. 20 tests.
+
+Cumulatief op refactor-branch: **306 tests passed**, alle quality gates groen.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.4 + §2.2.7 voltooid op refactor-branch
 
 Vier trunk-commits op `refactor/iso-audit-milestone-b` na de PR-consolidatie:
