@@ -5,6 +5,21 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §3.2 (Notifiers — resolver + Slack + Email)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§3.2.1** `SqliteDecisionResolver` — action-set + append-only.
+- **§3.2.2** `SlackNotifier` — webhook + Web API paths; Block Kit payload.
+- **§3.2.5** `EmailNotifier` — SMTP met STARTTLS; vier magic-link URLs.
+- **§3.2.4 + §3.2.8** 37 tests (11 resolver + 12 slack + 10 email + 4 contract).
+- **§3.2.9** Contract-tests parametrizen nu over `slack` + `email`.
+- **IntegerMode** injecteert `decision_id` in context vóór notifier-call.
+- Uitgesteld: §3.2.3 (Slack Events handler), §3.2.6-7 (Flask-portaal),
+  §3.2.10-11 (docs) — afhankelijk van HTTP-server-keuze in §3.2.6.
+
+Cumulatief: 634 tests passed; 81% overall cov.
+
 ### Changed — 2026-05-14 — iso-refactor: §3.1.3-6 (Modes + decisions-tabel)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b` start Milestone C:

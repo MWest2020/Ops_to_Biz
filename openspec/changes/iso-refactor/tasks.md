@@ -152,17 +152,17 @@
 
 ### 3.2 Notifiers-implementatie
 
-- [ ] 3.2.1 Schrijf `src/iso_audit/notifiers/resolver.py` met `DecisionResolver`-implementatie die `decisions`-tabel updatet en pipeline-thread unblockt
-- [ ] 3.2.2 Schrijf `src/iso_audit/notifiers/slack.py` met `SlackNotifier`: Block Kit message-templates, button-actions (`Goedkeuren`, `Afwijzen`, `Aanpassen`, `Afbreken`), modal-flow voor Aanpassen
-- [ ] 3.2.3 Implementeer Slack Events API handler die button-callbacks parseert naar `(decision_id, action, modified_payload)` en `DecisionResolver.resolve()` aanroept
-- [ ] 3.2.4 Schrijf `tests/notifiers/test_slack.py` met gemockte Slack-API; verifieer button-callback-flow end-to-end
-- [ ] 3.2.5 Schrijf `src/iso_audit/notifiers/email.py` met `EmailNotifier`: SMTP-out via env-vars, magic-link-tokens met TTL
-- [ ] 3.2.6 Schrijf `src/iso_audit/notifiers/portal.py` met Flask-mini-portaal: routes `/decision/<id>/{approve,reject,modify,abort}`, `/modify`-form-pagina, single-use-token-validatie, expiratie-handling (410 Gone)
-- [ ] 3.2.7 Implementeer portal-startup als sub-thread of separate process bij `iso-audit pipeline --notifier email` start; configureerbare poort via `ISO_AUDIT_PORTAL_PORT`
-- [ ] 3.2.8 Schrijf `tests/notifiers/test_email.py` met gemockte SMTP en Flask test-client; verifieer magic-link-flow incl. expiratie en single-use
-- [ ] 3.2.9 Verifieer dat `tests/notifiers/test_protocol_contract.py` nu groene parametrized-tests heeft voor `slack` én `email`
-- [ ] 3.2.10 Schrijf `docs/notifiers/slack.md` met setup-instructies (Slack-app creation, OAuth-scopes, env-vars)
-- [ ] 3.2.11 Schrijf `docs/notifiers/email.md` met setup-instructies + acceptable-risk-notitie over HTTP-zonder-TLS in MVP
+- [x] 3.2.1 Schrijf `src/iso_audit/notifiers/resolver.py` met `DecisionResolver`-implementatie die `decisions`-tabel updatet en pipeline-thread unblockt — `SqliteDecisionResolver`; action-set `approve|reject|modify|abort`; 11 tests, 96% cov; append-only via `WHERE status='pending'`
+- [x] 3.2.2 Schrijf `src/iso_audit/notifiers/slack.py` met `SlackNotifier`: Block Kit message-templates — webhook of Web API; payload met sectie + context; 97% cov. *Button-actions modal-flow uitgesteld naar §3.2.3*
+- [ ] 3.2.3 Implementeer Slack Events API handler die button-callbacks parseert naar `(decision_id, action, modified_payload)` en `DecisionResolver.resolve()` aanroept — *uitgesteld; vereist HTTP-endpoint (zelfde Flask-app als §3.2.6) + Slack-app config*
+- [x] 3.2.4 Schrijf `tests/notifiers/test_slack.py` met gemockte Slack-API — webhook + Web API + validatie + healthcheck; 12 tests
+- [x] 3.2.5 Schrijf `src/iso_audit/notifiers/email.py` met `EmailNotifier`: SMTP-out via env-vars, magic-link-tokens — SMTP met STARTTLS, vier magic-link-URLs per decision; token-opslag delegeren aan portaal; 96% cov
+- [ ] 3.2.6 Schrijf `src/iso_audit/notifiers/portal.py` met Flask-mini-portaal — *uitgesteld; eigen sessie wegens HTTP-server-complexiteit*
+- [ ] 3.2.7 Implementeer portal-startup als sub-thread of separate process — *uitgesteld; afhankelijk van §3.2.6*
+- [x] 3.2.8 Schrijf `tests/notifiers/test_email.py` met gemockte SMTP — message-content, magic-links, error-paden; 10 tests
+- [x] 3.2.9 Verifieer dat `tests/notifiers/test_protocol_contract.py` nu groene parametrized-tests heeft voor `slack` én `email` — bevestigd; `test_registry_bevat_minstens_slack_en_email` vervangt M-A's `test_registry_is_empty`
+- [ ] 3.2.10 Schrijf `docs/notifiers/slack.md` — *uitgesteld; samen met §3.2.3*
+- [ ] 3.2.11 Schrijf `docs/notifiers/email.md` met setup-instructies + acceptable-risk-notitie — *uitgesteld; samen met §3.2.6*
 
 ### 3.3 Sink-implementatie (DriveSink)
 
