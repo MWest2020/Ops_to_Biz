@@ -5,6 +5,17 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.4 + §2.2.7 voltooid op refactor-branch
+
+Vier trunk-commits op `refactor/iso-audit-milestone-b` na de PR-consolidatie:
+
+- **§2.4.4** `miro/ingest.py` — paginatie via MiroClient.paginated_get; 24 tests over kleurconventie, HTML-strip, sticky+text combineren.
+- **§2.4.3** `miro/board_setup.py` — HTTP via MiroClient; lazy imports naar `iso_audit.{classification,data,store}`; `MIRO_ISO_PROJECT_ID` env-override; schema-extensies gracefully gemist via `sqlite3.OperationalError`-catch; 20 tests.
+- **§2.4.5** `miro/interview.py` — sluit §2.4 af; 13 tests over `_vragen_voor_clausule`/`_uitnodiging_tekst`/`_actieve_sessies` (mocked) + factories.
+- **§2.2.7** `classification/llm.py` — was eerder geblokkeerd op store + normteksten; nu unblocked. `SUB_OVERZICHT` + `SYSTEM_PROMPT` lazy gebouwd; 9 tests over batch-flow + error-paden.
+
+Cumulatief op refactor-branch: **236 tests passed**, alle quality gates groen.
+
 ### Changed — 2026-05-14 — iso-refactor: 8 PRs geconsolideerd op `refactor/iso-audit-milestone-b`
 
 Trunk-based correctie op de M-B aanpak: 8 feature-branches/PR's was overhead

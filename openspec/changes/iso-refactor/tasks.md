@@ -72,7 +72,7 @@
 - [x] 2.2.4 Migreer `audit/clause_mapping.py` → `src/iso_audit/classification/clause_mapping.py` — PR #4: 13 tests + pyyaml dep + importlib.resources padresolutie + types-PyYAML dev-dep
 - [ ] 2.2.5 Ontvlecht `audit/finding_classification.py` en `audit/finding_classification_20260420.py`: documenteer in commit-message dat `_20260420.py` regel 645 importeert uit het oude bestand; consolideer naar `src/iso_audit/classification/findings.py` met behoud van beide functionaliteiten — *BLOCKED: vereist eerst PR #2 (store) + PR #4 (clause_mapping) gemerged op main + §2.3 (drive_ingest) + §2.4 (miro_ingest) gedaan*
 - [x] 2.2.6 Migreer `audit/thema_classifier.py` → `src/iso_audit/classification/thema.py` — PR #6: 24 tests + anthropic + python-dotenv deps + THEMA_LIJST/THEMA_REGELS/bepaal_thema geconsolideerd uit tabular_report (bron-of-truth)
-- [ ] 2.2.7 Migreer `audit/llm_classifier.py` → `src/iso_audit/classification/llm.py` — *BLOCKED: vereist PR #2 (store) + PR #3 (normteksten) gemerged op main; module importeert anders runtime niet*
+- [x] 2.2.7 Migreer `audit/llm_classifier.py` → `src/iso_audit/classification/llm.py` — 9 tests; SUB_OVERZICHT + SYSTEM_PROMPT lazy gebouwd (geen module-load-tijd deps); imports naar iso_audit.{data.normteksten, store}
 - [ ] 2.2.8 Verplaats inline classifier-prompts naar `src/iso_audit/classification/prompts/<versie>.md` per requirement; refactor classifier-code om prompts uit bestand te laden — *pending op §2.2.5/2.2.7*
 
 ### 2.3 Source-adapters (eerlijke decompositie)
@@ -90,9 +90,9 @@
 
 - [x] 2.4.1 Maak `src/iso_audit/miro/` package met `__init__.py` — PR #7
 - [x] 2.4.2 Schrijf `src/iso_audit/miro/client.py` met gedeelde HTTP-laag: `_headers()`, `_post()`, `_get()`, rate-limit handling, retry-logica — PR #7: `MiroClient` met typed `MiroError`/`MiroRateLimitError`, configurable timeout + throttle, `paginated_get` generator. requests + types-requests deps.
-- [ ] 2.4.3 Migreer `audit/miro_board_setup.py` → `src/iso_audit/miro/board_setup.py`; gebruikt `client.py` (geen eigen `_headers`/`_post`) — *BLOCKED: lazy-importeert `clause_mapping` + `normteksten` uit PR #3/#4*
-- [ ] 2.4.4 Migreer `audit/miro_ingest.py` → `src/iso_audit/miro/ingest.py`; gebruikt `client.py` — *standalone, kan na PR #7 merge*
-- [ ] 2.4.5 Migreer `audit/interview_miro.py` → `src/iso_audit/miro/interview.py`; gebruikt `client.py` — *BLOCKED: lazy-importeert `clause_mapping` + `normteksten`*
+- [x] 2.4.3 Migreer `audit/miro_board_setup.py` → `src/iso_audit/miro/board_setup.py`; gebruikt `client.py` (geen eigen `_headers`/`_post`) — 20 tests; ISO_PROJECT_ID via `MIRO_ISO_PROJECT_ID` env-override; schema-extensies (documents.scope, audit_planning) gracefully gemist via sqlite3.OperationalError-catch
+- [x] 2.4.4 Migreer `audit/miro_ingest.py` → `src/iso_audit/miro/ingest.py`; gebruikt `client.py` — 24 tests; KLEUR_CLASSIFICATIE behouden; paginatie via MiroClient.paginated_get
+- [x] 2.4.5 Migreer `audit/interview_miro.py` → `src/iso_audit/miro/interview.py`; gebruikt `client.py` — 13 tests; lazy imports naar iso_audit.{classification,data,store}; FRAME_HEIGHT/FRAME_GAP_Y geïmporteerd uit miro.board_setup voor consistente y-offset
 - [x] 2.4.6 Schrijf `tests/miro/test_client.py` met rate-limit + retry-edge-cases — PR #7: 21 cases (rate-limit/retry, pagination, 5xx, timeout, throttle, droog-mode)
 - [ ] 2.4.7 Visuele snapshot-test op één Miro-test-bord: JSON-export voor refactor → na refactor identiek — *pending op echte board-toegang*
 
