@@ -5,6 +5,16 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §3.1.7-8 + §3.5 (pipeline emit + CLI mode/notifier)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§3.1.7 (partial)** `pipeline.py` emit Decisions op `ingest_scope` (laag) + `send_report` (hoog). Andere vier punten vereisen findings.py-refactor; gepland voor §3.6.
+- **§3.1.8 (partial)** `_resume_pending_decisions()` logt pending rijen bij start. Resume-polling komt mee met audit_id-persistentie in §3.6.
+- **§3.5.1-3** `--mode` + `--notifier` flags + env-fallbacks + warning bij `--notifier` met autonoom.
+- **§3.5.4** `iso-audit doctor` healthchecks notifiers; exit-1 bij fail.
+- 12 nieuwe tests + 4 bijgewerkt. Cumulatief: 646 tests passed; 81% overall cov.
+
 ### Changed — 2026-05-14 — iso-refactor: §3.2 (Notifiers — resolver + Slack + Email)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:

@@ -147,8 +147,8 @@
 - [x] 3.1.4 Schrijf `src/iso_audit/modes/autonoom.py` met `AutonoomMode` — selectieve persistentie (alleen risico=hoog schrijft een rij), `delete_data` hard skip; 8 tests, 100% cov
 - [x] 3.1.5 Schrijf `src/iso_audit/modes/integer.py` met `IntegerMode` — Notifier via DI; risico-regels (hoog altijd, midden bij confidence<0.7, laag bij `vraag_bevestiging=True`); polling met `commit()` per iteratie i.v.m. SQLite read-isolation; configureerbare timeout (24h default); 10 tests, 96% cov
 - [x] 3.1.6 Schrijf `tests/modes/test_autonoom.py` en `tests/modes/test_integer.py` — 18 tests; threaded resolver-mock met per-thread sqlite-connecties (sqlite3 default `check_same_thread=True`)
-- [ ] 3.1.7 Refactor `pipeline.py` om Decision-events te emitteren op zeven beslispunten: `ingest_scope`, `merge_drive_miro`, `classify_finding`, `assign_clausule`, `generate_report_section`, `send_report`, `delete_data`
-- [ ] 3.1.8 Implementeer crash-recovery in pipeline: bij start, query op `(audit_id, status="pending")` en hervat in plaats van opnieuw escaleren
+- [x] 3.1.7 Refactor `pipeline.py` om Decision-events te emitteren op zeven beslispunten — **PARTIAL**: `ingest_scope` (laag, opt-in `vraag_bevestiging`), `send_report` (hoog), `delete_data` voorbereid maar nog niet aangeroepen. De andere vier (`merge_drive_miro`, `classify_finding`, `assign_clausule`, `generate_report_section`) vereisen findings.py-refactor; gepland voor §3.6
+- [x] 3.1.8 Implementeer crash-recovery in pipeline — `_resume_pending_decisions()` logt pending rijen bij start; volledige resume-polling op specifieke decision_id komt met `audit_id`-persistentie in §3.6
 
 ### 3.2 Notifiers-implementatie
 
@@ -182,10 +182,10 @@
 
 ### 3.5 CLI-uitbreiding
 
-- [ ] 3.5.1 Implementeer `--mode <autonoom|integer>` flag (verplicht, met `ISO_AUDIT_DEFAULT_MODE`-fallback + INFO-log)
-- [ ] 3.5.2 Implementeer `--notifier <naam>` flag (verplicht alleen bij `--mode integer`, met `ISO_AUDIT_DEFAULT_NOTIFIER`-fallback)
-- [ ] 3.5.3 Implementeer waarschuwing wanneer `--notifier` wordt opgegeven met `--mode autonoom` (WARNING-log "notifier ignored in autonoom mode")
-- [ ] 3.5.4 Update `iso-audit doctor` subcommand om `healthcheck()` op alle geregistreerde sources én notifiers aan te roepen
+- [x] 3.5.1 Implementeer `--mode <autonoom|integer>` flag (verplicht, met `ISO_AUDIT_DEFAULT_MODE`-fallback + INFO-log) — `_resolve_mode()` valideert; ontbrekend → SystemExit(2)
+- [x] 3.5.2 Implementeer `--notifier <naam>` flag (verplicht alleen bij `--mode integer`, met `ISO_AUDIT_DEFAULT_NOTIFIER`-fallback) — `_resolve_notifier()` met validatie tegen `notifiers.available()`
+- [x] 3.5.3 Implementeer waarschuwing wanneer `--notifier` wordt opgegeven met `--mode autonoom` — WARNING-log "notifier ignored in autonoom mode"
+- [x] 3.5.4 Update `iso-audit doctor` subcommand om `healthcheck()` op alle geregistreerde sources én notifiers aan te roepen — notifier-healthcheck-loop toegevoegd; exit-code 1 bij eerste fail. *Source-healthcheck nog niet toegevoegd; protocol heeft het wel maar adapters implementeren het pas vanaf §3.4*
 
 ### 3.6 Eerste integer-run-validatie
 
