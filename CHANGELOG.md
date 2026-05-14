@@ -5,6 +5,22 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: 8 PRs geconsolideerd op `refactor/iso-audit-milestone-b`
+
+Trunk-based correctie op de M-B aanpak: 8 feature-branches/PR's was overhead
+voor een solo-private repo. Alle 8 zijn nu samengevoegd op één lang-lopende
+refactor-branch.
+
+- Branch: `refactor/iso-audit-milestone-b` op `MWest2020/iso-audit`
+- Lokaal: 170 tests passed, mypy --strict + ruff + bandit allemaal schoon
+- 8 PR's gesloten met verwijzing naar de branch (content behouden)
+- Pyproject.toml-conflicten op merge-volgorde opgelost: alle deps geconsolideerd
+  alfabetisch in één `dependencies`-lijst; mypy-overrides samengevouwen tot één
+  block (`googleapiclient.*`, `google.oauth2.*`, `htmldocx`).
+
+Toekomstig M-B werk gaat **direct op deze branch** of op main (per feedback
+[trunk_based]: solo-private repo's = trunk-based, geen PR-per-task).
+
 ### Changed — 2026-05-14 — Milestone B van iso-refactor: +2 PRs op iso-audit (totaal 8)
 
 Vervolg-PRs op de iso-refactor (zie eerdere entries voor PR #1-#6):
