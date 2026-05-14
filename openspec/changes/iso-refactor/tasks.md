@@ -103,7 +103,7 @@
 - [ ] 2.5.3 Migreer `audit/template_setup.py` → `src/iso_audit/reporting/template_setup.py` — *BLOCKED: imports `audit.gws_client` (§2.3.1 pending)*
 - [x] 2.5.4 Migreer `audit/full_report.py` → `src/iso_audit/reporting/full_report.py` — 15 tests; scope+planning fallback bij schema-gap; lazy imports naar normteksten + store + clause_mapping
 - [x] 2.5.5 Migreer `audit/landscape.py` → `src/iso_audit/reporting/landscape.py` — 11 tests; scope-fallback met OperationalError-catch; FTS5-zoek via store.zoek
-- [ ] 2.5.6 Migreer `audit/make_pptx.py` → `src/iso_audit/reporting/pptx.py`
+- [x] 2.5.6 Migreer `audit/make_pptx.py` → `src/iso_audit/reporting/make_pptx.py` — verbatim hardcoded MT-snapshot (2026-03-24); 5 tests, 96% cov; python-pptx als runtime-dep; mypy `no-untyped-call` disabled voor deze module
 - [x] 2.5.7 Migreer `audit/sheets_gws.py` → `src/iso_audit/reporting/sheets_gws.py` (verwijder de "Consistent met argocd_sync"-comment, want de twee repo's zijn nu losgekoppeld) — 24 tests; bandit-nosec op gws CLI; comment verwijderd
 - [ ] 2.5.8 Migreer `audit/interview.py` → `src/iso_audit/interview.py`
 - [ ] 2.5.9 Migreer `audit/ingest.py` → `src/iso_audit/ingest.py`; refactor om SourceRegistry te gebruiken in plaats van directe imports

@@ -5,6 +5,12 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.5.6 make_pptx snapshot
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.5.6** `reporting/make_pptx.py` — verbatim-migratie van de hardcoded MT-snapshot-presentatie (2026-03-24); dode imports verwijderd, type-hints toegevoegd; `python-pptx>=1.0.2` runtime-dep; mypy `no-untyped-call` per-module disabled; 5 tests, 96% cov. Cumulatief: 506 tests passed.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.5.1 rest (tabular_report + slide_summary + report_generation)
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:
