@@ -5,6 +5,15 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.5.8 + §2.5.9 (interview + ingest)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.5.9** `ingest.py` — top-level orchestrator; `beschikbare_bronnen()` combineert Source-registry met pseudo-bron `miro`; `--only` valideert tegen die lijst (13 tests, 95% cov).
+- **§2.5.8** `interview.py` — interactieve clausule-doorloop; ANSI-helpers, `_vraag_bevinding` met EOF/quit-handling (13 tests, 68% cov; overall gate 82%).
+
+Cumulatief op refactor-branch: **532 tests passed**, alle quality gates groen.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.5.6 make_pptx snapshot
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:
