@@ -5,6 +5,15 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §3.1.3-6 (Modes + decisions-tabel)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b` start Milestone C:
+
+- **§3.1.3** `decisions`-tabel + helpers in `store.py` (append-only audit-trail).
+- **§3.1.4** `AutonoomMode` — selectieve persistentie, `delete_data` skip.
+- **§3.1.5** `IntegerMode` — Notifier-DI, risico-escalatie, polling met commit-per-iteratie, 24h timeout default.
+- **§3.1.6** 18 tests (8 autonoom + 10 integer); threaded resolver-mock met per-thread sqlite-connecties. Cumulatief: 600 tests passed; 80% overall cov.
+
 ### Changed — 2026-05-14 — iso-refactor: §2.7 + §2.8 (M-B acceptatie + verhuizing)
 
 Twee commits sluiten milestone B af:

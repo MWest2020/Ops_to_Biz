@@ -143,10 +143,10 @@
 
 - [ ] 3.1.1 Schrijf `src/iso_audit/modes/__init__.py`
 - [ ] 3.1.2 Schrijf `src/iso_audit/modes/base.py` met `Mode` Protocol + `Decision` dataclass (`punt`, `context`, `voorstel`, `risico`, `audit_id`)
-- [ ] 3.1.3 Voeg `decisions`-tabel toe aan `store.py` met migratie-script + indexen `idx_decisions_audit_status` en `idx_decisions_punt_resolved`
-- [ ] 3.1.4 Schrijf `src/iso_audit/modes/autonoom.py` met `AutonoomMode`; selectieve persistentie (alleen `risico="hoog"` rijen schrijven)
-- [ ] 3.1.5 Schrijf `src/iso_audit/modes/integer.py` met `IntegerMode`; constructor accepteert `Notifier` via DI; risico-gebaseerde escalatie-logica + low-confidence-escalatie + `vraag_bevestiging`-flag-handling
-- [ ] 3.1.6 Schrijf `tests/modes/test_autonoom.py` en `tests/modes/test_integer.py`
+- [x] 3.1.3 Voeg `decisions`-tabel toe aan `store.py` met migratie-script + indexen `idx_decisions_audit_status` en `idx_decisions_punt_resolved` — additief (`CREATE IF NOT EXISTS`); kolommen volgens spec; FK naar `classifications.id`; helpers `schrijf_decision`/`resolve_decision`/`laad_decision`/`laad_pending_decisions` met append-only-guard
+- [x] 3.1.4 Schrijf `src/iso_audit/modes/autonoom.py` met `AutonoomMode` — selectieve persistentie (alleen risico=hoog schrijft een rij), `delete_data` hard skip; 8 tests, 100% cov
+- [x] 3.1.5 Schrijf `src/iso_audit/modes/integer.py` met `IntegerMode` — Notifier via DI; risico-regels (hoog altijd, midden bij confidence<0.7, laag bij `vraag_bevestiging=True`); polling met `commit()` per iteratie i.v.m. SQLite read-isolation; configureerbare timeout (24h default); 10 tests, 96% cov
+- [x] 3.1.6 Schrijf `tests/modes/test_autonoom.py` en `tests/modes/test_integer.py` — 18 tests; threaded resolver-mock met per-thread sqlite-connecties (sqlite3 default `check_same_thread=True`)
 - [ ] 3.1.7 Refactor `pipeline.py` om Decision-events te emitteren op zeven beslispunten: `ingest_scope`, `merge_drive_miro`, `classify_finding`, `assign_clausule`, `generate_report_section`, `send_report`, `delete_data`
 - [ ] 3.1.8 Implementeer crash-recovery in pipeline: bij start, query op `(audit_id, status="pending")` en hervat in plaats van opnieuw escaleren
 
