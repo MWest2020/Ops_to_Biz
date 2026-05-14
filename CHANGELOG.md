@@ -5,6 +5,29 @@ Format volgt [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/).
 
 ## [Unreleased]
 
+### Changed — 2026-05-14 — iso-refactor: §2.6.3-5 (classifications traceability)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.6.3** `classifications`-tabel toegevoegd aan `store.py` — additief, dedup-key `(audit_id, finding_id, prompt_versie, model_versie)`; indexen op audit_id/finding_id.
+- **§2.6.4** `log_classification()` helper + wiring in `_classificeer_doc`/`_classificeer_miro_batch`: schrijven voor JSON-parsing. `_maak_audit_id()` produceert per-run UTC-tijdstempel.
+- **§2.6.5** 14 tests in `tests/store/test_classifications.py`. Cumulatief 582 tests passed.
+
+### Changed — 2026-05-14 — iso-refactor: §2.6.1 + §2.6.2 (CLI subcommands + --source)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.6.1** `cli.py` herschreven naar argparse-met-subparsers (`pipeline`, `doctor`, `setup-template`); `__main__.py` delegeert naar `cli.main`; 15 tests.
+- **§2.6.2** `--source` flag verplicht voor `pipeline`, multi-value, met `ISO_AUDIT_DEFAULT_SOURCE`-env-var-fallback (INFO-log) en validatie tegen `beschikbare_bronnen()`. Cumulatief: 568 tests passed.
+
+### Changed — 2026-05-14 — iso-refactor: §2.5.11 + §2.5.12 (assets + config layout)
+
+Eén trunk-commit op `refactor/iso-audit-milestone-b`:
+
+- **§2.5.11** `assets/` — 3 Conduction-logo-SVG's gekopieerd; `importlib.resources`-toegang.
+- **§2.5.12** layout-aanpassing — clause-maps + normteksten + report-template-yaml leven onder `data/` (niet `config/` zoals oorspronkelijk gepland); `service_account.json` niet gemigreerd (credentials horen in `.env`).
+- **§2.5.3** taskstatus gefixed (code was al gecommit als `e52c9da`, vinkje vergeten).
+
 ### Changed — 2026-05-14 — iso-refactor: §2.5.10 pipeline orchestrator
 
 Eén trunk-commit op `refactor/iso-audit-milestone-b`:

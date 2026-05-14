@@ -100,7 +100,7 @@
 
 - [x] 2.5.1 Migreer `audit/local_report.py` + `tabular_report.py` + `report_generation.py` + `slide_summary.py` → `src/iso_audit/reporting/` — `local_report.py` (20 tests), `tabular_report.py` (21 tests, 87% cov, thema-bron-of-truth, openpyxl Excel-output), `slide_summary.py` (8 tests, 98% cov, Google Slides via `clients/gws`), `report_generation.py` (18 tests, 84% cov, Google Docs template-fill + Anthropic management-summary)
 - [x] 2.5.2 Migreer `audit/md_to_html.py` + `html_to_docx.py` + `html_to_pdf.py` → `src/iso_audit/reporting/` — PR #8: 16 tests, markdown + python-docx + htmldocx runtime-deps, Path-based padresolutie, bandit nosec voor Chrome subprocess
-- [ ] 2.5.3 Migreer `audit/template_setup.py` → `src/iso_audit/reporting/template_setup.py` — *BLOCKED: imports `audit.gws_client` (§2.3.1 pending)*
+- [x] 2.5.3 Migreer `audit/template_setup.py` → `src/iso_audit/reporting/template_setup.py` — 9 tests, YAML via `importlib.resources`; gebruikt `iso_audit.clients.gws._gws`
 - [x] 2.5.4 Migreer `audit/full_report.py` → `src/iso_audit/reporting/full_report.py` — 15 tests; scope+planning fallback bij schema-gap; lazy imports naar normteksten + store + clause_mapping
 - [x] 2.5.5 Migreer `audit/landscape.py` → `src/iso_audit/reporting/landscape.py` — 11 tests; scope-fallback met OperationalError-catch; FTS5-zoek via store.zoek
 - [x] 2.5.6 Migreer `audit/make_pptx.py` → `src/iso_audit/reporting/make_pptx.py` — verbatim hardcoded MT-snapshot (2026-03-24); 5 tests, 96% cov; python-pptx als runtime-dep; mypy `no-untyped-call` disabled voor deze module
@@ -108,16 +108,16 @@
 - [x] 2.5.8 Migreer `audit/interview.py` → `src/iso_audit/interview.py` — 13 tests; ANSI-helpers, `_vraag_bevinding` met EOF/quit-handling, gap-detectie via `clause_matches`; 68% per-file coverage
 - [x] 2.5.9 Migreer `audit/ingest.py` → `src/iso_audit/ingest.py`; refactor om SourceRegistry te gebruiken in plaats van directe imports — `beschikbare_bronnen()` combineert `sources.available()` met pseudo-bron `miro` (zolang er geen `MiroSource`-adapter is); 13 tests, 95% cov
 - [x] 2.5.10 Migreer `audit/pipeline.py` → `src/iso_audit/pipeline.py` — imports vernieuwd, HTML/DOCX/PDF als private helper, type-hints, `main(argv)` voor testbaarheid, specifieke `OSError`-vangst, bandit nosec voor `gws auth status`; 21 tests, 79% overall cov (run_audit/run_report_only-bodies niet integraal getest)
-- [ ] 2.5.11 Migreer `audit/assets/` → `src/iso_audit/assets/` (logo-SVG's)
-- [ ] 2.5.12 Migreer `audit/config/` → `src/iso_audit/config/` (clause-maps, normteksten-yaml)
+- [x] 2.5.11 Migreer `audit/assets/` → `src/iso_audit/assets/` (logo-SVG's) — 3 SVGs gekopieerd; `__init__.py` toegevoegd voor `importlib.resources`-toegang; wheel-build bevestigd
+- [x] 2.5.12 Migreer `audit/config/` (clause-maps, normteksten-yaml) — *layout-aanpassing: clause-maps onder `src/iso_audit/data/clause_maps/` (§2.2.4), normteksten als Python modules onder `src/iso_audit/data/normteksten/` (§2.2.3), report-template-yaml onder `src/iso_audit/data/` (§2.5.3). `service_account.json` niet gemigreerd — credentials horen per-environment in `.env`, niet gebundeld*
 
 ### 2.6 CLI en classificatie-traceability
 
-- [ ] 2.6.1 Schrijf `src/iso_audit/cli.py` als console-script entry-point; ondersteunt `iso-audit pipeline`, `iso-audit doctor`, `iso-audit setup-template` subcommands; één `main()` waarnaar `__main__.py` en `pipeline.py`-direct-call delegeren
-- [ ] 2.6.2 Implementeer `--source` flag (verplicht, multi-value, met `ISO_AUDIT_DEFAULT_SOURCE`-env-var-fallback inclusief INFO-log bij fallback-gebruik)
-- [ ] 2.6.3 Voeg `classifications`-tabel toe aan `store.py` met migratie-script + indexen
-- [ ] 2.6.4 Refactor classifier-code om input-hash, prompt-versie, model-versie, raw output te persisteren in `classifications`-tabel vóór consumptie van resultaat
-- [ ] 2.6.5 Schrijf `tests/store/test_classifications.py` met scenario's voor traceability-velden + dedup op `(audit_id, finding_id, prompt_versie, model_versie)`
+- [x] 2.6.1 Schrijf `src/iso_audit/cli.py` als console-script entry-point; ondersteunt `iso-audit pipeline`, `iso-audit doctor`, `iso-audit setup-template` subcommands; één `main()` waarnaar `__main__.py` delegeert — 15 tests; `iso_audit.pipeline.main()` blijft bestaan voor `python -m iso_audit.pipeline`
+- [x] 2.6.2 Implementeer `--source` flag (verplicht voor `pipeline`, multi-value, met `ISO_AUDIT_DEFAULT_SOURCE`-env-var-fallback inclusief INFO-log bij fallback-gebruik) — `_resolve_sources()` valideert tegen `iso_audit.ingest.beschikbare_bronnen()`
+- [x] 2.6.3 Voeg `classifications`-tabel toe aan `store.py` met indexen — additief (CREATE IF NOT EXISTS); kolommen `(audit_id, finding_id, input_hash, prompt_versie, model_versie, raw_output, usage_json, elapsed_s, created_at)`; UNIQUE op dedup-key; indexen op audit_id en finding_id
+- [x] 2.6.4 Refactor classifier-code om input-hash, prompt-versie, model-versie, raw output te persisteren in `classifications`-tabel vóór consumptie van resultaat — `log_classification()` helper in `store.py`; `_classificeer_doc` en `_classificeer_miro_batch` schrijven vóór `_parse_json_list`; `_ClassifyContext` krijgt `audit_id`; `_maak_audit_id()` produceert UTC-tijdstempel
+- [x] 2.6.5 Schrijf `tests/store/test_classifications.py` met scenario's voor traceability-velden + dedup op `(audit_id, finding_id, prompt_versie, model_versie)` — 14 tests: schema, indexen, basis-insert, prompt_versie/input_hash determinisme, dedup-splits (audit_id, prompt_versie, model_versie), filters in `laad_classifications`
 
 ### 2.7 Verhuizing OpenSpec-changes
 
