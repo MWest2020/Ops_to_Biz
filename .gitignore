@@ -47,5 +47,8 @@ output/
 Thumbs.db
 
 # Google Service Account key — nooit committen
-audit/config/service_account.json
 *.json.key
+
+# Lokale kubeconfig — referentie staat in .env via KUBECONFIG.
+# Een kubeconfig in de repo-root is een security-risico (tokens + cluster-creds).
+/config

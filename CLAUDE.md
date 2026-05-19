@@ -2,93 +2,104 @@
 
 ## What this repo is
 
-Eén actief Python subsysteem in deze repo:
+Eén actief Python subsysteem:
 
 | Subsystem | Path | Purpose |
 |---|---|---|
-| ArgoCD → Sheets sync | `argocd_sync/` | Daily sync of ArgoCD app data to Google Sheets or .xlsx |
+| ArgoCD → Sheets sync | `argocd_sync/` | Daily sync van ArgoCD app-data naar Google Sheets of `.xlsx` |
 
-All argocd-sync code lives under `argocd_sync/`.
+Inclusief de pivot-tabbladen "Deployments" (ops view) en "Business"
+(klant × product × env cockpit voor management).
 
-### Verhuisd: ISO Audit pipeline
+### Historie: ISO Audit pipeline verhuisd
 
-> **`audit/` is DEPRECATED** (per milestone B van `openspec/changes/iso-refactor/`,
-> afgerond 2026-05-14). De actuele code leeft in
-> [`MWest2020/iso-audit`](https://github.com/MWest2020/iso-audit) onder
-> de `refactor/iso-audit-milestone-b`-branch. Gebruik die repo voor alle
-> nieuwe werk; deze `audit/`-directory wordt niet meer bijgewerkt.
-
-> **Niet geraakt door de refactor:** `output/business_gws.py` en
-> `output/gws.py` blijven hier — die zijn onderdeel van het
-> handbook/output-pad, niet van de audit-pipeline.
+De ISO 9001/27001 audit-pipeline (voorheen `audit/`) is per
+milestone B van het `iso-refactor` change-proposal verhuisd naar
+[`MWest2020/iso-audit`](https://github.com/MWest2020/iso-audit).
+De code is uit dit repo verwijderd op 2026-05-19; de OpenSpec-design
+ligt in `openspec/changes/archive/iso-refactor/`. Voor alle audit-
+gerelateerd werk: gebruik de `iso-audit` repo.
 
 ---
 
-## Running things
-
-### ArgoCD sync
+## Running
 
 ```bash
-export OUTPUT_MODE=local   # or gws
+# Lokaal — schrijft .xlsx naar LOCAL_OUTPUT_PATH
+export OUTPUT_MODE=local
 ./argocd_sync/sync.sh
+
+# Productie — schrijft naar Google Sheets via gws CLI
+export OUTPUT_MODE=gws
+./argocd_sync/sync.sh
+
+# Optionele business-view (extra tab/file naast de hoofd-output)
+export BUSINESS_OUTPUT=gws   # of local
 ```
 
-### ISO Audit pipeline
-
-Verhuisd naar [`MWest2020/iso-audit`](https://github.com/MWest2020/iso-audit).
-Gebruik dat project:
-
-```bash
-# In iso-audit repo:
-uv sync
-uv run iso-audit pipeline --source drive --norm 9001
-uv run iso-audit setup-template  # first-time only
-uv run iso-audit doctor          # environment check
-```
+De pipeline draait dagelijks via `argocd_sync/k8s/cronjob.yaml`
+(production, in-cluster) of via een systemd-timer op de laptop
+zolang k8s-auth (zie `openspec/changes/k8s-cronjob-auth/`) niet
+is gemigreerd.
 
 ---
 
 ## Key conventions
 
-### Namespace parsing (argocd_sync)
+### Namespace parsing
 
-- Pattern `{org}` → customer=org, env=(empty)
-- Pattern `{org}-{env}` → only if suffix is in: `prod, accept, acc, staging, dev, test, uat`
-- Otherwise: full namespace = customer name, no env
+- Pattern `{org}` → customer = org, env = (empty)
+- Pattern `{org}-{env}` → alleen als suffix in
+  `prod, accept, acc, staging, dev, test, uat`
+- Anders: hele namespace = customer name, geen env
 
-### Upsert (argocd_sync)
+### Upsert
 
 - Composite key: `name + namespace`
-- Owned columns are overwritten every run; extra/manual columns are preserved
-- Soft-delete: removed apps get `sync_status=[REMOVED]` + `removed_at` date; never deleted
+- Owned-columns worden elke run overschreven; manuele kolommen blijven
+- Soft-delete: verwijderde apps krijgen `sync_status=[REMOVED]` +
+  `removed_at` datum; rij wordt nooit gewist
 
-### Miro colour convention (audit)
+### Business view
 
-| Colour | Meaning |
-|---|---|
-| Green | Positive / conform |
-| Orange | NC (non-conformity) |
-| Red | NC (non-conformity) |
-| Other | No pre-classification |
+Tweede sheet/file met klant × product × env pivot. Product-detectie
+op app-name pattern (`nextcloud`, `react`, `tilburg`). `[REMOVED]`
+apps worden uitgesloten. Zie `argocd_sync/output/business_*.py`.
 
 ---
 
 ## External integrations
 
-- **Google Workspace** — service account with domain-wide delegation; scopes: Drive, Docs, Sheets, Slides, Gmail (optional), Calendar (optional)
-- **Miro** — REST API token with `boards:read`
 - **ArgoCD** — bearer token; read-only (`applications, get`)
+- **Google Sheets** — via `gws` CLI (`OUTPUT_MODE=gws`); service-
+  account JSON via `GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE`
+- **Kubernetes** (optioneel) — `kubectl exec` voor Nextcloud
+  storage-enrichment; `KUBECONFIG` of in-cluster service-account
 
-Credentials are always in `.env` (never committed). See `.env.example`.
+Credentials staan in `.env` (nooit gecommit). Zie `.env.example`.
 
 ---
 
 ## Design workflow (OpenSpec)
 
-Changes are tracked under `openspec/changes/`. Use the `/openspec-*` skills to explore, propose, apply, and archive changes. Specs live in `openspec/specs/`.
+Changes onder `openspec/changes/`. Capability-specs onder
+`openspec/specs/`. Gebruik de `/openspec-*` skills om changes te
+verkennen, voorstellen, toepassen en archiveren.
+
+Open changes (2026-05-19):
+
+- `auto-create-tabs` — Sheets-tabs auto-aanmaken bij sync
+- `business-view-filter` — gefilterde cockpit-tab voor management
+- `cockpit-redesign` — subscription ↔ deployment reconciliatie
+- `k8s-cronjob-auth` — gws-creds in k8s Secret zodat CronJob in-cluster draait
+- `nextcloud-app-versions` — app-versies per klant in cockpit
+- `systemd-laptop-timer` — interim laptop-timer tot k8s-auth gefixed is
+
+Gearchiveerd: `iso-refactor` (audit-verhuizing naar standalone repo).
 
 ---
 
-## Output artefacts
+## Output artefacten
 
-Outputs go under `output/` — this directory is gitignored. Do not commit `.xlsx`, `.db`, or report files.
+Output gaat onder `output/` — die directory is gitignored. Commit
+geen `.xlsx`, `.db`, of rapport-bestanden.
