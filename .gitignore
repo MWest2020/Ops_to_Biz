@@ -28,10 +28,12 @@ htmlcov/
 .coverage
 *.cover
 
-# Output artefacts — alle audit-rapporten, databases, logs en presentaties.
+# Output artefacten — alle audit-rapporten, databases, logs en presentaties.
 # Bevat (potentieel) persoonsgegevens en audit-bewijs; mag nooit in een repo.
+# Root-only zodat het argocd_sync/output/-module (Python-code) niet wordt
+# meegenomen door dezelfde regel.
 *.xlsx
-output/
+/output/
 
 # Claude
 .claude/settings.local.json

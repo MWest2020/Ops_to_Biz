@@ -1,3 +1,8 @@
 # ArgoCD → Sheets sync
 requests==2.32.5
 openpyxl==3.1.5
+
+# Direct Sheets API (gws-output-pad zonder externe `gws` CLI; nodig voor
+# headless timer/CronJob via service-account + domain-wide delegation).
+google-api-python-client>=2.120.0
+google-auth>=2.28.0

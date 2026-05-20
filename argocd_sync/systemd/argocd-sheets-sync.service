@@ -2,7 +2,6 @@
 Description=ArgoCD → Google Sheets sync
 After=network-online.target mcc-login.service
 Wants=network-online.target
-OnFailure=argocd-sync-failed-notify.service
 
 [Service]
 Type=oneshot
