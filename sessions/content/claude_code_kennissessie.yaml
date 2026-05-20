@@ -1,0 +1,100 @@
+naam: "Claude Code kennissessie"
+doelgroep: "Developers zonder of met weinig Claude Code ervaring"
+duur_totaal_min: 30
+taal: nl
+
+blokken:
+  - titel: "Do's & Don'ts"
+    duur_min: 6
+    standaard_kleur: "light_yellow"
+    tijdlijn_kleur: "light_blue"
+    items:
+      # Do's — groen
+      - tekst: "✅ Gebruik CLAUDE.md om context te geven: projectnaam, conventies, wat NIET mag"
+        kleur: "light_green"
+      - tekst: "✅ Begin met een kleine, concrete taak die je toch al moest doen"
+        kleur: "light_green"
+      - tekst: "✅ Review gegenereerde code altijd — jij bent verantwoordelijk"
+        kleur: "light_green"
+      - tekst: "✅ Gebruik /compact als de context vol raakt"
+        kleur: "light_green"
+      - tekst: "✅ Sla geleerde regels op in CLAUDE.md na elke fout"
+        kleur: "light_green"
+      # Don'ts — rood
+      - tekst: "❌ Geen secrets, tokens of wachtwoorden in prompts plakken"
+        kleur: "red"
+      - tekst: "❌ Niet blind vertrouwen op gegenereerde code zonder test"
+        kleur: "red"
+      - tekst: "❌ Niet pushen zonder git diff --staged te bekijken"
+        kleur: "red"
+      - tekst: "❌ Geen grote refactors in één keer — werk in kleine stappen"
+        kleur: "red"
+      - tekst: "❌ Niet frustreren als het mis gaat — context resetten en opnieuw"
+        kleur: "red"
+
+  - titel: "Hoe beginnen"
+    duur_min: 7
+    standaard_kleur: "light_blue"
+    tijdlijn_kleur: "light_blue"
+    items:
+      # Hoofdboodschap — geel
+      - tekst: "🎯 Niet tijdens de sessie — maar dit weekend. Kies één klein projectje van je eigen lijstje."
+        kleur: "light_yellow"
+      # Wat maakt een goed eerste project — blauw
+      - tekst: "✅ Klein en afgebakend — iets wat je in 1-2 uur kan afmaken"
+        kleur: "light_blue"
+      - tekst: "✅ Al op je lijstje — iets wat je toch al wou doen"
+        kleur: "light_blue"
+      - tekst: "✅ Iets wat jij al begrijpt — dan zie je meteen wat Claude doet"
+        kleur: "light_blue"
+      - tekst: "✅ Geen productie-impact — thuis, zijprojectje, of test-omgeving"
+        kleur: "light_blue"
+      # Inspiratie van de presenter — groen
+      - tekst: "💼 Projectjes ter inspiratie — de presenter deelt z'n eigen voorbeelden"
+        kleur: "light_green"
+      # Praktische eerste stap — geel
+      - tekst: "💡 Eerste stap: installeer Claude Code, open je project, typ: claude\nnpm install -g @anthropic-ai/claude-code"
+        kleur: "light_yellow"
+
+  - titel: "De 7 levels"
+    duur_min: 10
+    standaard_kleur: "light_blue"
+    tijdlijn_kleur: "light_blue"
+    items:
+      # Levels 1-3: in scope voor beginners — lichtgroen
+      - tekst: "⭐ Level 1 — Anatomie van een goede skill\nSKILL.md: naam, description, body. De description bepaalt of de skill getriggerd wordt."
+        kleur: "light_green"
+      - tekst: "⭐ Level 2 — Golden rule: Point, Don't Dump\nHoud SKILL.md slank. Verwijs naar losse docs die alleen laden als nodig."
+        kleur: "light_green"
+      - tekst: "⭐ Level 3 — Skills importeren én verbeteren\nImporteer van GitHub of collega's — maar test en verbeter altijd voor gebruik. 40% van publieke skills maakt output slechter."
+        kleur: "light_green"
+      # Levels 4-7: voor later — lichtblauw
+      - tekst: "🔵 Level 4 — Personaliseren op jouw organisatie\nInjecteer jouw SOPs, naamconventies en regels via CLAUDE.md en knowledge-bestanden."
+        kleur: "light_blue"
+      - tekst: "🔵 Level 5 — Meten met binary evals\nSchrijf 4-6 ja/nee-vragen per skill. Bouw een testharnas. Benchmark pass-rate."
+        kleur: "light_blue"
+      - tekst: "🔵 Level 6 — Skills die zichzelf verbeteren\nNa elke fout: reflecteer → generaliseer → schrijf naar CLAUDE.md. Het systeem wordt beter zonder handmatige tussenkomst."
+        kleur: "light_blue"
+      - tekst: "🔵 Level 7 — AI workforce bouwen\nMeerdere gespecialiseerde skills als 'rollen'. Jij wordt supervisor, AI voert uit."
+        kleur: "light_blue"
+      # Label voor scope
+      - tekst: "👆 Levels 1-3 zijn het startpunt voor vandaag"
+        kleur: "light_yellow"
+
+  - titel: "Plenair — ervaringen delen"
+    duur_min: 5
+    standaard_kleur: "light_gray"
+    tijdlijn_kleur: "light_blue"
+    items:
+      # Discussievragen — geel
+      - tekst: "💬 Wat heb jij al geprobeerd met AI-tools in je werk? Wat werkte wel / niet?"
+        kleur: "light_yellow"
+      - tekst: "💬 Welke taak zou jij morgen willen uitproberen met Claude Code?"
+        kleur: "light_yellow"
+      # Ruimte voor input — lichtgrijs
+      - tekst: ""
+        kleur: "gray"
+      - tekst: ""
+        kleur: "gray"
+      - tekst: ""
+        kleur: "gray"
